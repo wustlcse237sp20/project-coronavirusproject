@@ -8,14 +8,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 
-//import org.json.simple.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.json.JSONObject;
+
 public class CoronaClass {
 
 	private static HttpURLConnection connection;
@@ -51,7 +52,7 @@ public class CoronaClass {
 				reader.close();
 			}
 			
-			totalCases = parseJson(responseContent.toString());
+ 			// totalCases = parseJson(responseContent.toString());
 			
 			
 		}
@@ -66,7 +67,7 @@ public class CoronaClass {
 		}
 		
 		
-////		
+		
 		JFrame f = new JFrame("COVID-19 Tracker");
 		JLabel label = new JLabel();
 		label.setText(totalCases);
@@ -81,10 +82,11 @@ public class CoronaClass {
 
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            textArea.append("Update information\n");
+	            textArea.append(totalCases + "\n");
 
 	        }
 	    });
+	    
 	    f.add(label);
 	    f.setVisible(true);
 	    
@@ -93,6 +95,7 @@ public class CoronaClass {
 	    
 
 	}
+	
 	public static String parseJson(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		System.out.println("total cases:" + obj.getString("total_cases"));
