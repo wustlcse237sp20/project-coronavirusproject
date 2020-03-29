@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="M:/Classwork/cse237/Final/project-coronavirusproject/lib/json-20190722.jar"/>
+	<classpathentry kind="lib" path="/Users/zacharyserotte/git/project-coronavirusproject/lib/json-20190722.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
