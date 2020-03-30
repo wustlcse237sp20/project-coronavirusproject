@@ -25,7 +25,6 @@ public class CoronaClass {
 		BufferedReader reader;
 		String line;
 		StringBuffer responseContent = new StringBuffer();
-		String totalCases = new String("hi");
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/united_states_stat_small.php");
 			connection = (HttpURLConnection) url.openConnection();
@@ -50,7 +49,7 @@ public class CoronaClass {
 				reader.close();
 			}
 
-			totalCases = parseJson(responseContent.toString());
+			Globals.totalCases = parseJson(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -60,27 +59,8 @@ public class CoronaClass {
 			connection.disconnect();
 		}
 
-		////
-		JFrame f = new JFrame("COVID-19 Tracker");
-		// JLabel label = new JLabel();
-		// label.setText(totalCases);
-
-		f.setSize(1000, 1000);
-		f.setLocation(300, 200);
-		final JTextArea textArea = new JTextArea(100, 140);
-		f.getContentPane().add(BorderLayout.CENTER, textArea);
-		final JButton button = new JButton("Refresh");
-		f.getContentPane().add(BorderLayout.SOUTH, button);
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				textArea.append("hi");
-
-			}
-		});
-		// f.add(label);
-		f.setVisible(true);
-
+		actionPerformer test = new actionPerformer();
+		
 	}
 
 	public static String parseJson(String responseBody) {
