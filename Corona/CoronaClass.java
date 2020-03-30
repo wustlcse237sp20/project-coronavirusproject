@@ -60,7 +60,7 @@ public class CoronaClass {
 		}
 
 		actionPerformer test = new actionPerformer();
-		
+
 	}
 
 	public static String parseJson(String responseBody) {
