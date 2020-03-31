@@ -8,11 +8,17 @@ import javax.swing.JTextArea;
 
 public class actionPerformer implements ActionListener {
 	
-	JFrame f = new JFrame("COVID-19 Tracker");
-	final JTextArea textArea = new JTextArea(100, 140);
-	final JButton button = new JButton("Refresh");
+	JFrame f;
+	final JTextArea textArea;
+	final JButton button;
 	
 	public actionPerformer() {
+		f = new JFrame("COVID-19 Tracker");
+		textArea = new JTextArea(100, 140);
+		button = new JButton("Refresh");
+	}
+	
+	public void displayGUI() {
 		f.setSize(1000, 1000);
 		f.setLocation(300, 200);
 		f.getContentPane().add(BorderLayout.CENTER, textArea);

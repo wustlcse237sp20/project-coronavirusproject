@@ -11,7 +11,6 @@ public class CoronaClass {
 	private static HttpURLConnection connection;
 
 	public static void main(String[] args) {
-		// a
 		BufferedReader reader;
 		String line;
 		StringBuffer responseContent = new StringBuffer();
@@ -50,6 +49,7 @@ public class CoronaClass {
 		}
 
 		actionPerformer test = new actionPerformer();
+		test.displayGUI();
 		
 	}
 
