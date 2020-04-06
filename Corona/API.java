@@ -11,9 +11,10 @@ import org.json.JSONObject;
 public class API {
 
 	private static HttpURLConnection connection;
+	// private static String country;
 	private BufferedReader reader;
 	private String line;
-	StringBuffer responseContent;
+	private StringBuffer responseContent;
 	
 	public API () {
 		responseContent = new StringBuffer();
@@ -60,8 +61,15 @@ public class API {
 	
 	public static String parseJson(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
-		JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
+		if (obj.has("country")) {
+			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
+			if (countryStatisticArray.length() == 0) {
+				return "The specified country does not exist";
+			} else {
+				return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
+			}
+		}
+		return "Please enter a country into the text field";
 	}
 	
 }
