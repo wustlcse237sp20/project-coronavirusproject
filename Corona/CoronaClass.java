@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,7 +60,16 @@ public class CoronaClass {
 			connection.disconnect();
 		}
 
-		//actionPerformer test = new actionPerformer();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Display window = new Display();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 	}
 
