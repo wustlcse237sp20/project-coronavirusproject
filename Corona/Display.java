@@ -11,7 +11,7 @@ public class Display {
 	final JTextArea textArea = new JTextArea(100, 140);
 	private JFrame frame;
 	private JTextField textField;
-
+	//f
 	/**
 	 * Launch the application.
 	 */
@@ -32,6 +32,7 @@ public class Display {
 	 * Create the application.
 	 */
 	public Display() {
+		
 		initialize();
 	}
 
@@ -55,6 +56,7 @@ public class Display {
 		springLayout.putConstraint(SpringLayout.EAST, textField, -7, SpringLayout.WEST, btnRefresh);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		//btnRefresh.addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
