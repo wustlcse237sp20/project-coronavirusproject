@@ -14,7 +14,7 @@ public class CoronaClass {
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				} // hello
 			}
 		});
 
