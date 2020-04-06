@@ -1,8 +1,12 @@
+
 import java.awt.EventQueue;
 
 public class CoronaClass {
 
 	public static void main(String[] args) {
+		
+//		API api = new API();
+//		api.testConnection();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -14,7 +18,5 @@ public class CoronaClass {
 				} // hello
 			}
 		});
-
 	}
-
 }
