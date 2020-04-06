@@ -10,15 +10,15 @@ import org.json.JSONObject;
 public class API {
 
 	private static HttpURLConnection connection;
+	private BufferedReader reader;
+	private String line;
+	StringBuffer responseContent;
 	
 	public API () {
-		testConnection();
+		responseContent = new StringBuffer();
 	}
 	
-	private void testConnection() {
-		BufferedReader reader;
-		String line;
-		StringBuffer responseContent = new StringBuffer();
+	public void testConnection() {
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php");
 			connection = (HttpURLConnection) url.openConnection();
@@ -34,6 +34,7 @@ public class API {
 					responseContent.append(line);
 				}
 				reader.close();
+				System.out.println("Connection error");
 			} else { // connection successful
 
 				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -47,8 +48,10 @@ public class API {
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			System.out.println("Malformed URL Excpetion");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("IO Excpetion");
 		} finally {
 			connection.disconnect();
 		}
