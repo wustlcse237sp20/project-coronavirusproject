@@ -69,7 +69,7 @@ public class API {
 				return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
 			}
 		}
-		return "Please enter a country into the text field";
+		return "Please enter a country into the text field"; 
 	}
 	
 }
