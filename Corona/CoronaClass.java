@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JFrame;	
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -26,7 +26,7 @@ public class CoronaClass {
 		String line;
 		StringBuffer responseContent = new StringBuffer();
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/united_states_stat_small.php");
+			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php");
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
