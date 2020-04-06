@@ -59,7 +59,7 @@ public class CoronaClass {
 			connection.disconnect();
 		}
 
-		actionPerformer test = new actionPerformer();
+		//actionPerformer test = new actionPerformer();
 
 	}
 
