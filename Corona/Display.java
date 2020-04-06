@@ -9,30 +9,13 @@ import javax.swing.JTextField;
 
 public class Display {
 	final JTextArea textArea = new JTextArea(100, 140);
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textField;
-	//f
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Display window = new Display();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public Display() {
-		
 		initialize();
 	}
 
