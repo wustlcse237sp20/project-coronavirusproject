@@ -1,3 +1,4 @@
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,6 +43,7 @@ public class Display implements ActionListener {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
+		textArea.setBackground(SystemColor.window);
 		springLayout.putConstraint(SpringLayout.NORTH, textArea, 10, SpringLayout.SOUTH, btnRefresh);
 		frame.getContentPane().add(textArea);
 		btnRefresh.addActionListener(this);
