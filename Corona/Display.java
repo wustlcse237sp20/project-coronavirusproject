@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -6,9 +7,9 @@ import javax.swing.SpringLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class Display {
-	final JTextArea textArea = new JTextArea(100, 140);
-	public JFrame frame;
+public class Display implements ActionListener {
+	JFrame frame;
+	private JTextArea textArea;
 	private JTextField textField;
 
 	/**
@@ -38,9 +39,14 @@ public class Display {
 		springLayout.putConstraint(SpringLayout.EAST, textField, -7, SpringLayout.WEST, btnRefresh);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		//btnRefresh.addActionListener(this);
+		
+		textArea = new JTextArea(100, 140);
+		springLayout.putConstraint(SpringLayout.NORTH, textArea, 10, SpringLayout.SOUTH, btnRefresh);
+		frame.getContentPane().add(textArea);
+		btnRefresh.addActionListener(this);
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		textArea.append(Globals.totalCases+"\n");
 	}
