@@ -1,3 +1,4 @@
+import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,9 +49,17 @@ public class CoronaClass {
 			connection.disconnect();
 		}
 
-		actionPerformer test = new actionPerformer();
-		test.displayGUI();
-		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Display window = new Display();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 
 	public static String parseJson(String responseBody) {
