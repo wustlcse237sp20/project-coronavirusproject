@@ -5,6 +5,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 public class API {
@@ -18,9 +21,10 @@ public class API {
 		responseContent = new StringBuffer();
 	}
 	
-	public void testConnection() {
+	public void testConnection(String country) {
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php");
+			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
+
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -59,8 +63,10 @@ public class API {
 	
 	public static String parseJson(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
-		System.out.println("total cases:" + obj.getString("total_cases"));
-		return "total cases:" + obj.getString("total_cases");
+
+		JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
+		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
+
 	}
 	
 }

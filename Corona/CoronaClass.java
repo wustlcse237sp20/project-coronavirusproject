@@ -4,8 +4,10 @@ public class CoronaClass {
 
 	public static void main(String[] args) {
 		
-		API api = new API();
-		api.testConnection();
+
+//		API api = new API();
+//		api.testConnection();
+
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
