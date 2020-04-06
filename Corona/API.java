@@ -19,9 +19,9 @@ public class API {
 		responseContent = new StringBuffer();
 	}
 	
-	public void testConnection() {
+	public void testConnection(String country) {
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=Italy");
+			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -61,9 +61,7 @@ public class API {
 	public static String parseJson(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-		System.out.println("Country:" + obj.getString("country"));
-		System.out.println(countryStatisticArray.getJSONObject(0).getString("total_cases"));
-		return responseBody;
+		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
 	}
 	
 }
