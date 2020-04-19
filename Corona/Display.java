@@ -74,14 +74,15 @@ public class Display implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		Globals.searchText = textField.getText();
+		Globals.countryText = textField.getText();
+		Globals.provinceText = textField2.getText();
 		API api = new API();
 
 		
 		if(textField2.getText().equals("")) {
 			System.out.println("click");
-			api.testConnection(Globals.searchText);
-			if (api.testConnection(Globals.searchText)) {
+			api.testConnection(Globals.countryText);
+			if (api.testConnection(Globals.countryText)) {
 				if (Globals.extractedInfo) {
 					textArea.append("\n");
 					textArea.append("Country: " + Globals.country +"\n");
@@ -96,7 +97,9 @@ public class Display implements ActionListener {
 		}
 		else {
 			//Search other API
-			System.out.print("Not working");
+			api.getProvinceStats(Globals.provinceText);
+			
+			
 		}
 	}
 }
