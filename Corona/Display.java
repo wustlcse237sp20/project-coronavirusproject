@@ -75,8 +75,10 @@ public class Display implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Globals.searchText = textField.getText();
 		API api = new API();
-		System.out.println("called");
-		if(textField2.getText() == "") {
+
+		
+		if(textField2.getText().equals("")) {
+
 			
 			if (api.testConnection(Globals.searchText)) {
 				if (Globals.extractedInfo) {
@@ -94,6 +96,7 @@ public class Display implements ActionListener {
 		}
 		else {
 			//Search other API
+			System.out.print("Not working");
 		}
 	}
 }
