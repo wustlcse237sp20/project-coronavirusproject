@@ -9,4 +9,5 @@ public class Globals {
 	public static String total_recovered;
 	
 	public static boolean extractedInfo;
+	public static boolean province;
 }
