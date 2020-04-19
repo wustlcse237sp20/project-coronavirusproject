@@ -4,4 +4,5 @@ public class Globals {
 	public static String searchText;
 	public static String country;
 	public static boolean extractedInfo;
+	public static boolean province;
 }
