@@ -52,10 +52,19 @@ public class Display implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Globals.searchText = textField.getText();
-		// System.out.println(Globals.searchText);
 		API api = new API();
-		api.testConnection(Globals.searchText);
-		textArea.append(Globals.totalCases+"\n");
+		if (api.testConnection(Globals.searchText)) {
+			if (Globals.extractedInfo) {
+				textArea.append("\n");
+				textArea.append("Country: " + Globals.country +"\n");
+				textArea.append("Total cases: " + Globals.total_cases +"\n");
+				textArea.append("Total deaths: " + Globals.total_deaths+"\n");
+			} else {
+				textArea.append("Please enter a country into the search bar\n");
+			}
+		} else {
+			textArea.append("The specified country does not exist\n");
+		}
 	}
 
 }
