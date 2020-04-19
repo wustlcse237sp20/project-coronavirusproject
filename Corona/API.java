@@ -14,7 +14,7 @@ public class API {
 	private BufferedReader reader;
 	private String line;
 	private StringBuffer responseContent;
-	
+	//
 	public API () {
 		responseContent = new StringBuffer();
 	}
@@ -29,7 +29,7 @@ public class API {
 			connection.setRequestProperty("X-RapidAPI-Key", "7a7f939378mshbdfd83ae56d2d66p1b4c72jsndbf6cfd52b50");
 			int status = connection.getResponseCode();
 
-			if (status > 299) {
+			if (status >  299) {
 				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 				while ((line = reader.readLine()) != null) {
 					responseContent.append(line);
