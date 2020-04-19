@@ -37,7 +37,6 @@ public class API {
 				reader.close();
 				System.out.println("Connection error");
 			} else { // connection successful
-
 				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				while ((line = reader.readLine()) != null) {
 					responseContent.append(line);
