@@ -7,6 +7,8 @@ import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.JScrollPane;
 
 public class Display implements ActionListener {
 	JFrame frame;
@@ -20,8 +22,11 @@ public class Display implements ActionListener {
 	public Display() {
 		frame = new JFrame();
 		btnRefresh = new JButton("Search");
+		btnRefresh.setBounds(262, 10, 85, 29);
 		textField = new JTextField();
-		textArea = new JTextArea(100, 140);
+		textField.setBounds(125, 10, 130, 26);
+		textArea = new JTextArea(14, 20);
+		textArea.setBounds(2, 46, 240, 180);
 		initialize();
 	}
 
@@ -31,22 +36,18 @@ public class Display implements ActionListener {
 	private void initialize() {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SpringLayout springLayout = new SpringLayout();
-		frame.getContentPane().setLayout(springLayout);
-		
-		springLayout.putConstraint(SpringLayout.NORTH, btnRefresh, 10, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, btnRefresh, -103, SpringLayout.EAST, frame.getContentPane());
+		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnRefresh);
-		
-		springLayout.putConstraint(SpringLayout.NORTH, textField, 0, SpringLayout.NORTH, btnRefresh);
-		springLayout.putConstraint(SpringLayout.EAST, textField, -7, SpringLayout.WEST, btnRefresh);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textArea.setBackground(SystemColor.window);
-		springLayout.putConstraint(SpringLayout.NORTH, textArea, 10, SpringLayout.SOUTH, btnRefresh);
 		frame.getContentPane().add(textArea);
 		btnRefresh.addActionListener(this);
+		
+		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setBounds(0, 46, 450, 233);
+		frame.getContentPane().add(scroll);
 	}
 	
 	@Override
@@ -63,8 +64,7 @@ public class Display implements ActionListener {
 				textArea.append("Please enter a valid country into the search bar\n");
 			}
 		} else {
-			textArea.append("The specified country does not exist\n");
+			textArea.append("Failed Connections\n");
 		}
 	}
-
 }
