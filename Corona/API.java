@@ -54,6 +54,7 @@ public class API {
 				Globals.extractedInfo = false;
 			}
 			return true;
+
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
@@ -77,7 +78,9 @@ public class API {
 			Globals.total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
 			return true;
 		}
-		return false; 
+		return false;
 	}
+	
+	
 	
 }

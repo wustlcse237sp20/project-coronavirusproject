@@ -1,4 +1,3 @@
-
 public class Globals {
 	public static String total_cases;
 	public static String total_deaths;
