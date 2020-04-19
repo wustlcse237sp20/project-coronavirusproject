@@ -73,6 +73,10 @@ public class API {
 			Globals.country = obj.getString("country");
 			Globals.total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
 			Globals.total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
+			Globals.new_cases = countryStatisticArray.getJSONObject(0).getString("new_cases");
+			Globals.active_cases = countryStatisticArray.getJSONObject(0).getString("active_cases");
+			Globals.new_deaths = countryStatisticArray.getJSONObject(0).getString("new_deaths");
+			Globals.total_recovered = countryStatisticArray.getJSONObject(0).getString("total_recovered");
 			return true;
 		}
 		return false;

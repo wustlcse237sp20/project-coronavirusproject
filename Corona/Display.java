@@ -59,6 +59,10 @@ public class Display implements ActionListener {
 				textArea.append("Country: " + Globals.country +"\n");
 				textArea.append("Total cases: " + Globals.total_cases +"\n");
 				textArea.append("Total deaths: " + Globals.total_deaths+"\n");
+				textArea.append("New cases: " + Globals.new_cases+"\n");
+				textArea.append("New deaths: " + Globals.new_deaths+"\n");
+				textArea.append("Active cases: " + Globals.active_cases+"\n");
+				textArea.append("Total recovered: " + Globals.total_recovered+"\n");
 			} else {
 				textArea.append("Please enter a valid country into the search bar\n");
 			}
