@@ -51,9 +51,8 @@ public class Display implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		Globals.searchText = textField.getText();
-		System.out.println(Globals.searchText);
+		// System.out.println(Globals.searchText);
 		API api = new API();
 		api.testConnection(Globals.searchText);
 		textArea.append(Globals.totalCases+"\n");
