@@ -47,6 +47,7 @@ public class API {
 			}
 
 			Globals.totalCases = parseJson(responseContent.toString());
+			Globals.totalDeaths = parseJson2(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -66,7 +67,20 @@ public class API {
 			if (countryStatisticArray.length() == 0) {
 				return "The specified country does not exist";
 			} else {
-				return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
+				return obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases") + " cases";
+			}
+		}
+		return "Please enter a country into the text field"; 
+	}
+	
+	public static String parseJson2(String responseBody) {
+		JSONObject obj = new JSONObject(responseBody);
+		if (obj.has("country")) {
+			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
+			if (countryStatisticArray.length() == 0) {
+				return "The specified country does not exist";
+			} else {
+				return obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_deaths") + " deaths";
 			}
 		}
 		return "Please enter a country into the text field"; 
