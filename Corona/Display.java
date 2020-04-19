@@ -76,6 +76,7 @@ public class Display implements ActionListener {
 		
 		Globals.searchText = textField.getText();
 		API api = new API();
+
 		
 		if(textField2.getText().equals("")) {
 			System.out.println("click");
@@ -95,6 +96,8 @@ public class Display implements ActionListener {
 		}
 		else {
 			//Search other API
+			System.out.print("Not working");
 		}
 	}
 }
+
