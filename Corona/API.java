@@ -65,7 +65,7 @@ public class API {
 			connection.disconnect();
 		}
 	}
-	
+	 
 	public static boolean getInfo(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
