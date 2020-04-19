@@ -55,10 +55,10 @@ public class Display implements ActionListener {
 		API api = new API();
 		if (api.testConnection(Globals.searchText)) {
 			if (Globals.extractedInfo) {
+				textArea.append("\n");
 				textArea.append("Country: " + Globals.country +"\n");
 				textArea.append("Total cases: " + Globals.total_cases +"\n");
 				textArea.append("Total deaths: " + Globals.total_deaths+"\n");
-				textArea.append("\n");
 			} else {
 				textArea.append("Please enter a valid country into the search bar\n");
 			}

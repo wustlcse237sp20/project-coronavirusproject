@@ -11,7 +11,6 @@ import org.json.JSONObject;
 public class API {
 
 	private static HttpURLConnection connection;
-	// private static String country;
 	private BufferedReader reader;
 	private String line;
 	private StringBuffer responseContent;
