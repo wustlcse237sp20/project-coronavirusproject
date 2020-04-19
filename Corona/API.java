@@ -11,7 +11,6 @@ import org.json.JSONObject;
 public class API {
 
 	private static HttpURLConnection connection;
-	// private static String country;
 	private BufferedReader reader;
 	private String line;
 	private StringBuffer responseContent;
@@ -20,7 +19,7 @@ public class API {
 		responseContent = new StringBuffer();
 	}
 	
-	public void testConnection(String country) {
+	public boolean testConnection(String country) {
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
 			connection = (HttpURLConnection) url.openConnection();
@@ -46,30 +45,39 @@ public class API {
 				reader.close();
 			}
 
-			Globals.totalCases = parseJson(responseContent.toString());
+			if (getInfo(responseContent.toString())) {
+				Globals.extractedInfo = true;
+			} else {
+				Globals.extractedInfo = false;
+			}
+			return true;
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
+			return false;
+			
 		} finally {
 			connection.disconnect();
 		}
 	}
 	
-	public static String parseJson(String responseBody) {
+	public static boolean getInfo(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
 			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-			if (countryStatisticArray.length() == 0) {
-				return "The specified country does not exist";
-			} else {
-				return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
-			}
+			Globals.country = obj.getString("country");
+			Globals.total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
+			Globals.total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
+			return true;
 		}
-		return "Please enter a country into the text field"; 
+		return false;
 	}
+	
+	
 	
 }
