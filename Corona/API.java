@@ -19,7 +19,7 @@ public class API {
 		responseContent = new StringBuffer();
 	}
 	
-	public boolean testConnection(String country) {
+	public boolean testCountryAPIConnection(String country) {
 		System.out.println(country);
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
@@ -46,10 +46,10 @@ public class API {
 				reader.close();
 			}
 
-			if (getInfo(responseContent.toString())) {
-				Globals.extractedInfo = true;
+			if (getCountryInfo(responseContent.toString())) {
+				Globals.extractedCountryInfo = true;
 			} else {
-				Globals.extractedInfo = false;
+				Globals.extractedCountryInfo = false;
 			}
 			return true;
 
@@ -61,16 +61,15 @@ public class API {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
-			
 		} finally {
 			connection.disconnect();
 		}
 	}
 	
-	public boolean getProvinceStats(String province) {
-		System.out.println("province" + province);
+	public boolean testProvinceAPIConnection(String province) {
+		// System.out.println("province" + province);
 		try {
-			URL url = new URL("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?" );
+			URL url = new URL("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?");
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -86,7 +85,6 @@ public class API {
 				reader.close();
 				System.out.println("Connection error");
 			} else { // connection successful
-
 				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				while ((line = reader.readLine()) != null) {
 					responseContent.append(line);
@@ -94,12 +92,7 @@ public class API {
 				reader.close();
 			}
 			
-			if (getInfoByProvince(responseContent.toString(), province)) {
-				Globals.extractedInfo = true;
-				
-			} else {
-				Globals.extractedInfo = false;
-			}
+			getProvinceInfo(responseContent.toString(), province);
 			return true;
 
 		} catch (MalformedURLException e) {
@@ -116,35 +109,40 @@ public class API {
 		}
 	}
 	
-	public static boolean getInfo(String responseBody) {
+	public static boolean getCountryInfo(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
 			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-			Globals.country = obj.getString("country");
-			Globals.total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
-			Globals.total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
+			// Globals.country = obj.getString("country");
+			Globals.country_total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
+			Globals.country_total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
+			Globals.country_new_cases = countryStatisticArray.getJSONObject(0).getString("new_cases");
+			Globals.country_active_cases = countryStatisticArray.getJSONObject(0).getString("active_cases");
+			Globals.country_new_deaths = countryStatisticArray.getJSONObject(0).getString("new_deaths");
+			Globals.country_total_recovered = countryStatisticArray.getJSONObject(0).getString("total_recovered");
 			return true;
 		}
 		return false;
 	}
-	public static boolean getInfoByProvince(String responseBody, String provinceArgument) {
+	
+	public static void getProvinceInfo(String responseBody, String province) {
+		Globals.province_confirmed = 0;
+		Globals.province_deaths = 0;
 		JSONObject obj = new JSONObject(responseBody);
-		if(obj.has("data")) {
-			JSONObject covidStats =  (JSONObject) obj.get("data");
-			JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
-//			System.out.println(covidStatsArray);
-			for (int i = 0; i < covidStatsArray.length(); i++) {
-			    JSONObject jsonobject = covidStatsArray.getJSONObject(i);
-			    String currentCountry = jsonobject.getString("country");
-			    String currentProvince = jsonobject.getString("province");
-			    
-			    if(provinceArgument.equals(currentProvince)) {
-			    	System.out.println(jsonobject.get("city") + " has " + jsonobject.get("deaths") + " deaths");
-			    }
-			    
-			}
+		// if(obj.has("data")) {
+		JSONObject covidStats =  (JSONObject) obj.get("data");
+		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
+		for (int i = 0; i < covidStatsArray.length(); i++) {
+		    JSONObject jsonobject = covidStatsArray.getJSONObject(i);
+		    String currentProvince = jsonobject.getString("province");
+		    if(province.equals(currentProvince)) {
+		    	// System.out.println(jsonobject.get("city") + " has " + jsonobject.get("deaths") + " deaths");
+		    	// System.out.println(jsonobject.getInt("confirmed"));
+		    	Globals.province_confirmed += jsonobject.getInt("confirmed");
+		    	Globals.province_deaths += jsonobject.getInt("deaths");
+		    }
 		}
-		return true;
+		// }
 	}
 	
 	

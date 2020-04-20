@@ -6,9 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.JScrollPane;
-import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -61,7 +59,7 @@ public class Display implements ActionListener {
 		frame.getContentPane().add(textField2);
 		textField2.setColumns(10);
 		
-		JLabel lblIfYouWould = new JLabel("If you would like to display national cases only, leave Province field empty");
+		JLabel lblIfYouWould = new JLabel("If you would like to display national cases, leave the 'Province' field empty");
 		lblIfYouWould.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		lblIfYouWould.setBounds(87, 38, 346, 16);
 		frame.getContentPane().add(lblIfYouWould);
@@ -74,32 +72,43 @@ public class Display implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		Globals.countryText = textField.getText();
-		Globals.provinceText = textField2.getText();
+		Globals.country = textField.getText(); 
+		Globals.province = textField2.getText();
 		API api = new API();
-
 		
-		if(textField2.getText().equals("")) {
-			System.out.println("click");
-			api.testConnection(Globals.countryText);
-			if (api.testConnection(Globals.countryText)) {
-				if (Globals.extractedInfo) {
+		if(Globals.province.equals("")) {
+			// System.out.println("click");
+			// api.testCountryAPIConnection(Globals.country);
+			if (api.testCountryAPIConnection(Globals.country)) {
+				if (Globals.extractedCountryInfo) {
 					textArea.append("\n");
 					textArea.append("Country: " + Globals.country +"\n");
-					textArea.append("Total cases: " + Globals.total_cases +"\n");
-					textArea.append("Total deaths: " + Globals.total_deaths+"\n");
+					textArea.append("Total cases: " + Globals.country_total_cases +"\n");
+					textArea.append("Total deaths: " + Globals.country_total_deaths+"\n");
+					textArea.append("New cases: " + Globals.country_new_cases+"\n");
+					textArea.append("New deaths: " + Globals.country_new_deaths+"\n");
+					textArea.append("Active cases: " + Globals.country_active_cases+"\n");
+					textArea.append("Total recovered: " + Globals.country_total_recovered+"\n");
 				} else {
 					textArea.append("Please enter a valid country into the search bar\n");
 				}
 			} else {
-				textArea.append("Failed Connections, make sure specified country exists.\n");
+				textArea.append("Connection Failed. Please make sure specified country exists and is spelled correctly\n");
 			}
 		}
 		else {
-			//Search other API
-			api.getProvinceStats(Globals.provinceText);
-			
-			
+			if (api.testProvinceAPIConnection(Globals.province)) {
+				if (Globals.province_confirmed == 0) {
+					textArea.append("Country not found. Please make sure specified country exists and is spelled correctly (Case sensitive)\n");
+				} else {
+					textArea.append("\n");
+					textArea.append("Province: " + Globals.province +"\n");
+					textArea.append("Confirmed cases: " + Globals.province_confirmed +"\n");
+					textArea.append("Deaths: " + Globals.province_deaths+"\n");
+				}
+			} else {
+				textArea.append("Connection Failed. Please make sure specified Province exists and is spelled correctly\n");
+			}
 		}
 	}
 }
