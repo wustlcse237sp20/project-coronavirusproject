@@ -1,4 +1,12 @@
-package test;
+/*
+ * 
+ * IGNORE THIS TESTING CASE
+ * ADD TO IT LATER FOR THIRD ITERATION
+ * READ FROM FILE MAYBE 
+ * 
+ * 
+ * package test;
+ 
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,8 +34,8 @@ public class parsingCase1 {
 	
 	
 	public String testConnectionItaly(String country) {
-		String country1 = "{'country':'italy','latest_stat_by_country':[{'id':'1054413','country_name':'Italy','total_cases':'178,972','new_cases':'3,047','active_cases':'108,257','total_deaths':'23,660','new_deaths':'433','total_recovered':'47,055','serious_critical':'2,635','region':null,'total_cases_per1m':'2,960','record_date':'2020-04-19 18:36:01.549','deaths_per1m':'391','total_tests':'1,356,541','total_tests_per1m':'22,436'}";
-		return parseJsonCase1(country1);
+		String actual = "{\"name\":\"mkyong\",\"id\":1,\"age\":37}";
+		return parseJsonCase1(actual);
 	}
 	
 	public static String parseJsonCase1(String responseBody) {
@@ -40,14 +48,12 @@ public class parsingCase1 {
 	@Test
 	public void testUpperCaseItaly() {
 		
-		String getS = testConnectionItaly("{ name:John, age:30, car : null }");
-		System.out.println("OUR OUTPUT: " + "John");
-		System.out.println("TARGET OUTPUT: " + getS);
-		
-		assertTrue(19 >= getS.length());
+
+		assertTrue("mkyoung" == getS);
 	}
 	
 	
 	
 
 }
+*/

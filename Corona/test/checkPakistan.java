@@ -80,8 +80,10 @@ public class checkPakistan {
 		
 		String getS = testConnectionPakistan("Pakistan");
 		String getR = testConnectionPakistan("Pakistan");
+		System.out.println("************************************************************");
 		System.out.println("OUR OUTPUT: " + getS);
 		System.out.println("TARGET OUTPUT: " + getR);
+		System.out.println("************************************************************");
 		
 		assertTrue(getR.length() >= getS.length());
 	}
@@ -91,8 +93,10 @@ public class checkPakistan {
 		
 		String getS = testConnectionPakistan("pakistan");
 		String getR = testConnectionPakistan("pakistan");
+		System.out.println("************************************************************");
 		System.out.println("OUR OUTPUT: " + getS);
 		System.out.println("TARGET OUTPUT: " + getR);
+		System.out.println("************************************************************");
 		
 		assertTrue(getR.length() >= getS.length());
 	}

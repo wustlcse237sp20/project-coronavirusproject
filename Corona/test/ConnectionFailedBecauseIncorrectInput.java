@@ -1,6 +1,5 @@
 package test;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
@@ -10,26 +9,21 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-public class checkItaly {
+public class ConnectionFailedBecauseIncorrectInput {
 
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
-	StringBuffer responseContent;
+	private StringBuffer responseContent;
 	
-	public checkItaly () {
+	public ConnectionFailedBecauseIncorrectInput () {
 		responseContent = new StringBuffer();
 	}
-	
-	
-	public String testConnectionItaly(String country) {
+	public boolean testCountryAPIConnection(String country) {
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
-
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -44,6 +38,7 @@ public class checkItaly {
 				}
 				reader.close();
 				System.out.println("Connection error");
+				return false;
 			} else { // connection successful
 
 				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -51,57 +46,36 @@ public class checkItaly {
 					responseContent.append(line);
 				}
 				reader.close();
+				System.out.println("Connection Successful");
+				return true;
 			}
-			System.out.println(responseContent);
-
-			return parseJsonItaly(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
-			return "0";
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
-			return "0";
+			return false;
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Unspecified exception");
+			return false;
 		} finally {
 			connection.disconnect();
 		}
 	}
-	
-	public static String parseJsonItaly(String responseBody) {
-		System.out.println(responseBody);
-		JSONObject obj = new JSONObject(responseBody);
 
-		JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
-
-	}
 	@Test
-	public void testUpperCaseItaly() {
-		
-		String getS = testConnectionItaly("Italy");
-		String getR = testConnectionItaly("Italy");
+	void testConnectionSuccess() {
+		assertEquals(false, testCountryAPIConnection("Jackass"));
 		System.out.println("************************************************************");
-		System.out.println("OUR OUTPUT: " + getS);
-		System.out.println("TARGET OUTPUT: " + getR);
+		System.out.println("Description: This test will pass if invalid input is entered and thus connection is not established");
+		System.out.println("Green LIGHT: Incorrect Input Connection Failure");
+		System.out.println("API FAILED TO CONNECT...ENTER VALID INPUT");
 		System.out.println("************************************************************");
 		
-		assertTrue(getR.length() >= getS.length());
 	}
-	
-	@Test
-	public void testLowerCaseItaly() {
-		
-		String getS = testConnectionItaly("italy");
-		String getR = testConnectionItaly("italy");
-		System.out.println("************************************************************");
-		System.out.println("OUR OUTPUT: " + getS);
-		System.out.println("TARGET OUTPUT: " + getR);
-		System.out.println("************************************************************");
-		assertTrue(getR.length() >= getS.length());
-	}
-	
 
 }
-

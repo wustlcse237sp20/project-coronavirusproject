@@ -14,21 +14,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-public class checkItaly {
+public class JSONTestingCountryDeathsOnly {
 
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
 	StringBuffer responseContent;
 	
-	public checkItaly () {
+	public JSONTestingCountryDeathsOnly () {
 		responseContent = new StringBuffer();
 	}
 	
 	
-	public String testConnectionItaly(String country) {
+	public String testConnection(String country) {
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
+			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country");
 
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
@@ -52,9 +52,8 @@ public class checkItaly {
 				}
 				reader.close();
 			}
-			System.out.println(responseContent);
 
-			return parseJsonItaly(responseContent.toString());
+			return checkJSONParseAllCountryStats(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -69,39 +68,23 @@ public class checkItaly {
 		}
 	}
 	
-	public static String parseJsonItaly(String responseBody) {
-		System.out.println(responseBody);
+	public static String checkJSONParseAllCountryStats(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
-
-		JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
+		JSONArray countryStatisticArray = (JSONArray) obj.get("death_stat_by_country");
+		System.out.println(countryStatisticArray + "asshole");
+		return countryStatisticArray.toString();
+//		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
 
 	}
 	@Test
-	public void testUpperCaseItaly() {
+	public void testJSONParseAllCountryStats() {
 		
-		String getS = testConnectionItaly("Italy");
-		String getR = testConnectionItaly("Italy");
-		System.out.println("************************************************************");
-		System.out.println("OUR OUTPUT: " + getS);
-		System.out.println("TARGET OUTPUT: " + getR);
-		System.out.println("************************************************************");
+		String getS = testConnection("Pakistan");
 		
-		assertTrue(getR.length() >= getS.length());
+		assertTrue(getS.length() >= 25);
+		
 	}
 	
-	@Test
-	public void testLowerCaseItaly() {
-		
-		String getS = testConnectionItaly("italy");
-		String getR = testConnectionItaly("italy");
-		System.out.println("************************************************************");
-		System.out.println("OUR OUTPUT: " + getS);
-		System.out.println("TARGET OUTPUT: " + getR);
-		System.out.println("************************************************************");
-		assertTrue(getR.length() >= getS.length());
-	}
-	
+
 
 }
-

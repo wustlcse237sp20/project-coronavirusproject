@@ -80,8 +80,10 @@ public class checkVenezuela {
 		
 		String getS = testConnectionVenezuela("Venezuela");
 		String getR = testConnectionVenezuela("Venezuela");
+		System.out.println("************************************************************");
 		System.out.println("OUR OUTPUT: " + getS);
 		System.out.println("TARGET OUTPUT: " + getR);
+		System.out.println("************************************************************");
 		
 		assertTrue(getR.length() >= getS.length());
 	}
@@ -91,8 +93,10 @@ public class checkVenezuela {
 		
 		String getS = testConnectionVenezuela("venezuela");
 		String getR = testConnectionVenezuela("venezuela");
+		System.out.println("************************************************************");
 		System.out.println("OUR OUTPUT: " + getS);
 		System.out.println("TARGET OUTPUT: " + getR);
+		System.out.println("************************************************************");
 		
 		assertTrue(getR.length() >= getS.length());
 	}
