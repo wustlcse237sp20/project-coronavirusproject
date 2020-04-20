@@ -14,15 +14,17 @@ public class API {
 	private BufferedReader reader;
 	private String line;
 	private StringBuffer responseContent;
-	
-	public API () {
+
+	public API() {
 		responseContent = new StringBuffer();
 	}
-	
+
 	public boolean testCountryAPIConnection(String country) {
 		System.out.println(country);
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
+			URL url = new URL(
+					"https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country="
+							+ country);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -57,11 +59,16 @@ public class API {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
-		} catch (IOException e) {
+		} catch (java.net.SocketTimeoutException e) {
+			System.out.println("server connection false");
+			return false;
+		}
+
+		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
@@ -69,7 +76,7 @@ public class API {
 			connection.disconnect();
 		}
 	}
-	
+
 	public boolean testProvinceAPIConnection(String province) {
 		// System.out.println("province" + province);
 		try {
@@ -101,11 +108,16 @@ public class API {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
-		} catch (IOException e) {
+		} catch (java.net.SocketTimeoutException e) {
+			System.out.println("server connection false");
+			return false;
+		}
+
+		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
@@ -113,7 +125,7 @@ public class API {
 			connection.disconnect();
 		}
 	}
-	
+
 	public static boolean getCountryInfo(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
@@ -129,27 +141,26 @@ public class API {
 		}
 		return false;
 	}
-	
+
 	public static void getProvinceInfo(String responseBody, String province) {
 		Globals.province_confirmed = 0;
 		Globals.province_deaths = 0;
 		JSONObject obj = new JSONObject(responseBody);
 		// if(obj.has("data")) {
-		JSONObject covidStats =  (JSONObject) obj.get("data");
+		JSONObject covidStats = (JSONObject) obj.get("data");
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
 		for (int i = 0; i < covidStatsArray.length(); i++) {
-		    JSONObject jsonobject = covidStatsArray.getJSONObject(i);
-		    String currentProvince = jsonobject.getString("province");
-		    if(province.equals(currentProvince)) {
-		    	// System.out.println(jsonobject.get("city") + " has " + jsonobject.get("deaths") + " deaths");
-		    	// System.out.println(jsonobject.getInt("confirmed"));
-		    	Globals.province_confirmed += jsonobject.getInt("confirmed");
-		    	Globals.province_deaths += jsonobject.getInt("deaths");
-		    }
+			JSONObject jsonobject = covidStatsArray.getJSONObject(i);
+			String currentProvince = jsonobject.getString("province");
+			if (province.equals(currentProvince)) {
+				// System.out.println(jsonobject.get("city") + " has " +
+				// jsonobject.get("deaths") + " deaths");
+				// System.out.println(jsonobject.getInt("confirmed"));
+				Globals.province_confirmed += jsonobject.getInt("confirmed");
+				Globals.province_deaths += jsonobject.getInt("deaths");
+			}
 		}
 		// }
 	}
-	
-	
-	
+
 }
