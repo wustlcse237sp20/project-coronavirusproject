@@ -105,11 +105,7 @@ To add upon our interactive user interface, we implemented additional buttons th
 refresh the data but also allow the user to search a more specific area for information. The addition 
 visually enhances the layout of the pop-up window and  adds to the user friendliness of the UI. 
 Buttons also have the functionality that allows the user to select the country as well as provinces 
-to be displayed.
-
-We implemented, along with the extra button mentioned above an extra search bar. The purpose of this 
-additional search bar is to allow easy look up of the desired province for the user. This search bar 
-is independent of the search bar we had in our last iteration which focuses only on countries.
+to be displayed. A checkbox is used to specify whether the user is searching for national information or provincial information.
 
 Further logic and functionality were added to the program by introducing specificity and detail to 
 our project to pull the most up-to-date information from an API regarding COVID-19 that reflects very 
