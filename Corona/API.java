@@ -61,6 +61,10 @@ public class API {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Unspecified exception");
+			return false;
 		} finally {
 			connection.disconnect();
 		}
@@ -91,10 +95,8 @@ public class API {
 				}
 				reader.close();
 			}
-			
 			getProvinceInfo(responseContent.toString(), province);
 			return true;
-
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
@@ -103,7 +105,10 @@ public class API {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
-			
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Unspecified exception");
+			return false;
 		} finally {
 			connection.disconnect();
 		}
