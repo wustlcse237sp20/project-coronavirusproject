@@ -1,3 +1,4 @@
+
 package test;
 
 
@@ -14,22 +15,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-public class JSONTestingCountryDeathsOnly {
+
+public class TestJSONParseInputValidityBadInput {
 
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
 	StringBuffer responseContent;
+	public static boolean extractedCountryInfo;
 	
-	public JSONTestingCountryDeathsOnly () {
+	public TestJSONParseInputValidityBadInput() {
 		responseContent = new StringBuffer();
 	}
 	
 	
 	public String testConnection(String country) {
 		try {
-			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country");
-
+			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(10000);
@@ -52,39 +54,45 @@ public class JSONTestingCountryDeathsOnly {
 				}
 				reader.close();
 			}
-
-			return checkJSONParseAllCountryStats(responseContent.toString());
+			return TestJSONParseBadInput(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
-			return "0";
+			return "NO";
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
-			return "0";
+			return "NO";
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Unspecified exception");
+			return "NO UE";
 		} finally {
 			connection.disconnect();
 		}
 	}
-	
-	public static String checkJSONParseAllCountryStats(String responseBody) {
+	/*
+	 * */
+
+	public static String TestJSONParseBadInput (String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
-		JSONArray countryStatisticArray = (JSONArray) obj.get("death_stat_by_country");
-		System.out.println(countryStatisticArray + "asshole");
-		return countryStatisticArray.toString();
-//		return "Country: " + obj.getString("country") + " has " + countryStatisticArray.getJSONObject(0).getString("total_cases");
-
-	}
-	@Test
-	public void testJSONParseAllCountryStats() {
-		
-		String getS = testConnection("Pakistan");
-		
-		assertTrue(getS.length() >= 25);
-		
+		if (obj.has("country")) {
+			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
+			
+			String invalid_entry = countryStatisticArray.getJSONObject(0).getString("   2 d 5 q   ");
+			System.out.println("CHECKING EMPTY SPACE");
+			return "404";
+		}
+		return "404";
 	}
 	
-
-
+	@Test
+	public void JSONParseBadInputTest () {
+		System.out.println("************************************************************");
+		String getS = testConnection(" 1 3 4");
+		System.out.println(getS);
+		System.out.println("************************************************************");
+		assertFalse(getS != "NO UE");	
+	}
 }

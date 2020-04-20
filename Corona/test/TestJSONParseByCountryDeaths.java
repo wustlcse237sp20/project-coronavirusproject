@@ -15,33 +15,20 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 
-public class JSONTesting1 {
+public class TestJSONParseByCountryDeaths {
 
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
 	StringBuffer responseContent;
-	public static String country;
-	public static String country_total_cases;
-	public static String country_total_deaths;
-	public static String country_new_cases;
-	public static String country_active_cases;
-	public static String country_new_deaths;
-	public static String country_total_recovered;
-	
-	public static String province; 
-	public static int province_confirmed;
-	public static int province_deaths;
-	
 	public static boolean extractedCountryInfo;
 	
-	public JSONTesting1 () {
+	public TestJSONParseByCountryDeaths() {
 		responseContent = new StringBuffer();
 	}
 	
 	
-	public boolean testConnection(String country) {
-		System.out.println(country);
+	public String testConnection(String country) {
 		try {
 			URL url = new URL("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=" + country);
 			connection = (HttpURLConnection) url.openConnection();
@@ -66,26 +53,20 @@ public class JSONTesting1 {
 				}
 				reader.close();
 			}
-
-			if (getCountryInfo(responseContent.toString())) {
-				extractedCountryInfo = true;
-			} else {
-				extractedCountryInfo = false;
-			}
-			return true;
+			return JSONParseByCountryDeaths(responseContent.toString());
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
-			return false;
+			return "NO";
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
-			return false;
+			return "NO";
 		} catch (Exception e){
 			e.printStackTrace();
 			System.out.println("Unspecified exception");
-			return false;
+			return "NO";
 		} finally {
 			connection.disconnect();
 		}
@@ -93,42 +74,26 @@ public class JSONTesting1 {
 	/*
 	 * */
 
-	public static boolean getCountryInfo(String responseBody) {
+	public static String JSONParseByCountryDeaths (String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
 			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-			// Globals.country = obj.getString("country");
-			country_total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
-			country_total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
-			country_new_cases = countryStatisticArray.getJSONObject(0).getString("new_cases");
-			country_active_cases = countryStatisticArray.getJSONObject(0).getString("active_cases");
-			country_new_deaths = countryStatisticArray.getJSONObject(0).getString("new_deaths");
-			country_total_recovered = countryStatisticArray.getJSONObject(0).getString("total_recovered");
-			return true;
+			
+			String country_total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
+			System.out.println(country_total_deaths);
+			return country_total_deaths;
 		}
-		return false;
+		return "404";
 	}
 	
-	public static String checkJSONParseAllCountryStats(String responseBody) {
-		JSONObject obj = new JSONObject(responseBody);
-		System.out.println(obj);
-		if (obj.has("country")) {
-			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-			// Globals.country = obj.getString("country");
-			String country_total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
 
-
-			System.out.println(country_total_cases);
-			return country_total_cases;
-		}
-		return "NONEBABY";
-	}
 	
 	@Test
-	public void testJSONParseAllCountryStats() {
-		
-		boolean getS = testConnection("Pakistan");
-		
+	public void testJSONParseByCountryDeaths() {
+		System.out.println("************************************************************");
+		String getS = testConnection("Pakistan");
+		System.out.println("************************************************************");
+		assertTrue(getS != "404" );
 		
 	}
 	
