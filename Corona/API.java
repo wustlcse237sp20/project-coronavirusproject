@@ -57,12 +57,20 @@ public class API {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
-		} catch (IOException e) {
+		} catch (java.net.SocketTimeoutException e) {
+				System.out.println("server connection false");
+			   return false;
+		}
+		
+		
+		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
 			
-		} finally {
+		} 		
+		
+		finally {
 			connection.disconnect();
 		}
 	}
@@ -106,7 +114,13 @@ public class API {
 			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
-		} catch (IOException e) {
+		} catch (java.net.SocketTimeoutException e) {
+			System.out.println("server connection false");
+			   return false;
+		}
+		
+		
+		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
@@ -137,7 +151,7 @@ public class API {
 			    JSONObject jsonobject = covidStatsArray.getJSONObject(i);
 			    String currentCountry = jsonobject.getString("country");
 			    String currentProvince = jsonobject.getString("province");
-			    
+			    	
 			    if(provinceArgument.equals(currentProvince)) {
 			    	System.out.println(jsonobject.get("city") + " has " + jsonobject.get("deaths") + " deaths");
 			    }
