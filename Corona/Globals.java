@@ -1,13 +1,11 @@
 public class Globals {
-	public static String country;
+	public static String region;
 	public static String country_total_cases;
 	public static String country_total_deaths;
 	public static String country_new_cases;
 	public static String country_active_cases;
 	public static String country_new_deaths;
 	public static String country_total_recovered;
-	
-	public static String province; 
 	public static int province_confirmed;
 	public static int province_deaths;
 	

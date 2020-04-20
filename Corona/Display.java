@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -15,7 +16,7 @@ public class Display implements ActionListener {
 	private JButton btnRefresh;
 	private JTextArea textArea;
 	private JTextField textField;
-	private JTextField textField2;
+	private JCheckBox searchType;
 
 	/**
 	 * Create the application.
@@ -23,11 +24,11 @@ public class Display implements ActionListener {
 	public Display() {
 		frame = new JFrame();
 		btnRefresh = new JButton("Search");
-		btnRefresh.setBounds(425, 10, 85, 29);
+		btnRefresh.setBounds(286, 10, 85, 29);
 		textField = new JTextField();
-		textField.setBounds(77, 10, 130, 26);
+		textField.setBounds(68, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
-		textArea.setBounds(2, 2, 512, 157);
+		textArea.setBounds(-2, 6, 512, 157);
 		initialize();
 	}
 
@@ -46,43 +47,49 @@ public class Display implements ActionListener {
 		frame.getContentPane().add(textArea);
 		btnRefresh.addActionListener(this);
 		
-		JLabel lblCountry = new JLabel("Country");
-		lblCountry.setBounds(21, 15, 61, 16);
-		frame.getContentPane().add(lblCountry);
+		JLabel label = new JLabel("Region");
+		label.setBounds(21, 15, 61, 16);
+		frame.getContentPane().add(label);
 		
-		JLabel province = new JLabel("Province");
-		province.setBounds(224, 15, 61, 16);
-		frame.getContentPane().add(province);
-		
-		textField2 = new JTextField();
-		textField2.setBounds(283, 10, 130, 26);
-		frame.getContentPane().add(textField2);
-		textField2.setColumns(10);
-		
-		JLabel lblIfYouWould = new JLabel("If you would like to display national cases, leave the 'Province' field empty");
-		lblIfYouWould.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblIfYouWould.setBounds(87, 38, 346, 16);
-		frame.getContentPane().add(lblIfYouWould);
+		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox field unchecked");
+		description.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		description.setBounds(21, 38, 489, 16);
+		frame.getContentPane().add(description);
 		
 		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroll.setBounds(0, 66, 516, 213);
+		scroll.setBounds(0, 62, 516, 294);
 		frame.getContentPane().add(scroll);
+		
+		searchType = new JCheckBox("Province");
+		searchType.setBounds(199, 11, 85, 23);
+		frame.getContentPane().add(searchType);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		Globals.country = textField.getText(); 
-		Globals.province = textField2.getText();
+		Globals.region = textField.getText(); 
 		API api = new API();
 		
-		if(Globals.province.equals("")) {
-			// System.out.println("click");
-			// api.testCountryAPIConnection(Globals.country);
-			if (api.testCountryAPIConnection(Globals.country)) {
+		if(searchType.isSelected()) {
+			if (api.testProvinceAPIConnection(Globals.region)) {
+				if (Globals.province_confirmed == 0) {
+					textArea.append("Country not found. Please make sure specified country exists and is spelled correctly (Case sensitive)\n");
+				} else {
+					textArea.append("\n");
+					textArea.append("Province: " + Globals.region +"\n");
+					textArea.append("Confirmed cases: " + Globals.province_confirmed +"\n");
+					textArea.append("Deaths: " + Globals.province_deaths+"\n");
+				}
+			} else {
+				textArea.append("Connection Failed. Please make sure specified Province exists and is spelled correctly\n");
+			}
+		}
+		else {
+			if (api.testCountryAPIConnection(Globals.region)) {
 				if (Globals.extractedCountryInfo) {
 					textArea.append("\n");
-					textArea.append("Country: " + Globals.country +"\n");
+					textArea.append("Country: " + Globals.region +"\n");
 					textArea.append("Total cases: " + Globals.country_total_cases +"\n");
 					textArea.append("Total deaths: " + Globals.country_total_deaths+"\n");
 					textArea.append("New cases: " + Globals.country_new_cases+"\n");
@@ -94,20 +101,6 @@ public class Display implements ActionListener {
 				}
 			} else {
 				textArea.append("Connection Failed. Please make sure specified country exists and is spelled correctly\n");
-			}
-		}
-		else {
-			if (api.testProvinceAPIConnection(Globals.province)) {
-				if (Globals.province_confirmed == 0) {
-					textArea.append("Country not found. Please make sure specified country exists and is spelled correctly (Case sensitive)\n");
-				} else {
-					textArea.append("\n");
-					textArea.append("Province: " + Globals.province +"\n");
-					textArea.append("Confirmed cases: " + Globals.province_confirmed +"\n");
-					textArea.append("Deaths: " + Globals.province_deaths+"\n");
-				}
-			} else {
-				textArea.append("Connection Failed. Please make sure specified Province exists and is spelled correctly\n");
 			}
 		}
 	}

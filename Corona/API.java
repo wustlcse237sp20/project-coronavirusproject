@@ -130,7 +130,6 @@ public class API {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
 			JSONArray countryStatisticArray = (JSONArray) obj.get("latest_stat_by_country");
-			// Globals.country = obj.getString("country");
 			Globals.country_total_cases = countryStatisticArray.getJSONObject(0).getString("total_cases");
 			Globals.country_total_deaths = countryStatisticArray.getJSONObject(0).getString("total_deaths");
 			Globals.country_new_cases = countryStatisticArray.getJSONObject(0).getString("new_cases");
@@ -146,21 +145,16 @@ public class API {
 		Globals.province_confirmed = 0;
 		Globals.province_deaths = 0;
 		JSONObject obj = new JSONObject(responseBody);
-		// if(obj.has("data")) {
 		JSONObject covidStats = (JSONObject) obj.get("data");
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
 		for (int i = 0; i < covidStatsArray.length(); i++) {
 			JSONObject jsonobject = covidStatsArray.getJSONObject(i);
 			String currentProvince = jsonobject.getString("province");
 			if (province.equals(currentProvince)) {
-				// System.out.println(jsonobject.get("city") + " has " +
-				// jsonobject.get("deaths") + " deaths");
-				// System.out.println(jsonobject.getInt("confirmed"));
 				Globals.province_confirmed += jsonobject.getInt("confirmed");
 				Globals.province_deaths += jsonobject.getInt("deaths");
 			}
 		}
-		// }
 	}
 
 }
