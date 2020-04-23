@@ -17,18 +17,28 @@ public class Display implements ActionListener {
 	private JTextArea textArea;
 	private JTextField textField;
 	private JCheckBox searchType;
+	private JLabel label;
+	private JLabel description;
+	private JScrollPane scroll;
 
 	/**
 	 * Create the application.
 	 */
 	public Display() {
 		frame = new JFrame();
+		frame.setBounds(100, 100, 516, 300);
 		btnRefresh = new JButton("Search");
 		btnRefresh.setBounds(286, 10, 85, 29);
 		textField = new JTextField();
 		textField.setBounds(68, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
 		textArea.setBounds(-2, 6, 512, 157);
+		label = new JLabel("Region");
+		label.setBounds(21, 15, 61, 16);
+		description = new JLabel("If you would like to search for national information, leave the checkbox field unchecked");
+		description.setBounds(21, 38, 489, 16);
+		searchType = new JCheckBox("Province");
+		searchType.setBounds(199, 11, 85, 23);
 		initialize();
 	}
 
@@ -36,33 +46,21 @@ public class Display implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setBounds(100, 100, 516, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnRefresh);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		
 		textArea.setBackground(SystemColor.window);
 		frame.getContentPane().add(textArea);
 		btnRefresh.addActionListener(this);
-		
-		JLabel label = new JLabel("Region");
-		label.setBounds(21, 15, 61, 16);
 		frame.getContentPane().add(label);
-		
-		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox field unchecked");
 		description.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		description.setBounds(21, 38, 489, 16);
 		frame.getContentPane().add(description);
-		
-		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frame.getContentPane().add(searchType);
+		scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(0, 62, 516, 294);
 		frame.getContentPane().add(scroll);
-		
-		searchType = new JCheckBox("Province");
-		searchType.setBounds(199, 11, 85, 23);
-		frame.getContentPane().add(searchType);
 	}
 	
 	@Override
