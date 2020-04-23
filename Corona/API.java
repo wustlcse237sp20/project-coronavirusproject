@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class API {
-
+//Api
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
