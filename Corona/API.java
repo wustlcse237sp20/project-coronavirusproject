@@ -139,7 +139,7 @@ public class API {
 		return false;
 	}
 
-	public static void getProvinceInfo(String responseBody, String province) {
+	public static void getProvinceInfo(String responseBody, String provinceName) {
 		Globals.province_confirmed = 0;
 		Globals.province_deaths = 0;
 		JSONObject obj = new JSONObject(responseBody);
@@ -147,16 +147,20 @@ public class API {
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
 		for (int datapoint = 0; datapoint < covidStatsArray.length(); datapoint++) {
 			// There are 2944 valid pieces of data that we pull from our API. The rest is gibberish
-			if (datapoint < 2945) {
+			if (datapoint < 2945) { // only 2945 valid data points
 				JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
 				String currentProvince = jsonobject.getString("province");
-				if (currentProvince.equals(province)) {
+				int provinceCases = jsonobject.getInt("confirmed");
+				int provinceDeath = jsonobject.getInt("deaths");
+						
+				Province provinceObject = new Province(currentProvince, provinceCases, provinceDeath);
+				Globals.provinceArray[datapoint] = provinceObject;
+				
+				if (currentProvince.equals(provinceName)) {
 					Globals.province_confirmed += jsonobject.getInt("confirmed");
 					Globals.province_deaths += jsonobject.getInt("deaths");
 				}
-			} else {
-				break;
-			}
+			} 
 		}
 	}
 
