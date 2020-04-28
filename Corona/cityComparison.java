@@ -1,14 +1,27 @@
 public class cityComparison {
-	String checkCity1 = Globals.travelCity1;
-	String checkCity2 = Globals.travelCity2;
+	String checkCity1;
+	String checkCity2;
 	
-	String province1 = Globals.travelProvince1;
-	String province2 = Globals.travelProvince2;
-	String city1Population = Globals.travelCity1Population;
-	String city2Population = Globals.travelCity2Population;
+	String province1;
+	String province2;
+	String city1Population;
+	String city2Population;
 	
-	String cases1 = Globals.travelCity1Cases;
-	String cases2 = Globals.travelCity2Cases;
+	String cases1;
+	String cases2; 
+	public cityComparison() {
+		checkCity1 = Globals.travelCity1;
+		checkCity2 = Globals.travelCity2;
+		
+		province1 = Globals.travelProvince1;
+		province2 = Globals.travelProvince2;
+		city1Population = Globals.travelCity1Population;
+		city2Population = Globals.travelCity2Population;
+		
+		cases1 = Globals.travelCity1Cases;
+		cases2 = Globals.travelCity2Cases;
+	}
+	
 	
 	public String getCity1() {
 		return this.checkCity1;
