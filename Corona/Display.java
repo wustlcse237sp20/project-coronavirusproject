@@ -10,9 +10,6 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import java.awt.Font;
 
 public class Display implements ActionListener {
 	JFrame frame;
