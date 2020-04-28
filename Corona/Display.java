@@ -80,7 +80,6 @@ public class Display implements ActionListener {
 					textArea.append("Province not found. Please make sure specified country exists and is spelled correctly (Case sensitive)\n");
 					textArea.append("----------------------------\n");
 				} else {
-					textArea.append("\n");
 					textArea.append("Province: " + Globals.region +"\n");
 					textArea.append("Confirmed cases: " + Globals.province_confirmed +"\n");
 					textArea.append("Deaths: " + Globals.province_deaths+"\n");
@@ -94,7 +93,6 @@ public class Display implements ActionListener {
 		else {
 			if (api.testCountryAPIConnection(Globals.region)) {
 				if (Globals.extractedCountryInfo) {
-					textArea.append("\n");
 					textArea.append("Country: " + Globals.region +"\n");
 					textArea.append("Total cases: " + Globals.country_total_cases +"\n");
 					textArea.append("Total deaths: " + Globals.country_total_deaths+"\n");
