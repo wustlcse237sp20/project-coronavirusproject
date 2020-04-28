@@ -78,7 +78,6 @@ public class API {
 	}
 
 	public boolean testProvinceAPIConnection(String province) {
-		// System.out.println("province" + province);
 		try {
 			URL url = new URL("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?");
 			connection = (HttpURLConnection) url.openConnection();
@@ -112,7 +111,6 @@ public class API {
 			System.out.println("server connection false");
 			return false;
 		}
-
 		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Excpetion");
@@ -147,12 +145,17 @@ public class API {
 		JSONObject obj = new JSONObject(responseBody);
 		JSONObject covidStats = (JSONObject) obj.get("data");
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
-		for (int i = 0; i < covidStatsArray.length(); i++) {
-			JSONObject jsonobject = covidStatsArray.getJSONObject(i);
-			String currentProvince = jsonobject.getString("province");
-			if (province.equals(currentProvince)) {
-				Globals.province_confirmed += jsonobject.getInt("confirmed");
-				Globals.province_deaths += jsonobject.getInt("deaths");
+		for (int datapoint = 0; datapoint < covidStatsArray.length(); datapoint++) {
+			// There are 2944 valid pieces of data that we pull from our API. The rest is gibberish
+			if (datapoint < 2945) {
+				JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
+				String currentProvince = jsonobject.getString("province");
+				if (currentProvince.equals(province)) {
+					Globals.province_confirmed += jsonobject.getInt("confirmed");
+					Globals.province_deaths += jsonobject.getInt("deaths");
+				}
+			} else {
+				break;
 			}
 		}
 	}
