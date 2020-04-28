@@ -1,12 +1,13 @@
 public class Globals {
-	public static String searchText;
-	public static String country;
-	public static String total_cases;
-	public static String total_deaths;
-	public static String new_cases;
-	public static String active_cases;
-	public static String new_deaths;
-	public static String total_recovered;
+	public static String region;
+	public static String country_total_cases;
+	public static String country_total_deaths;
+	public static String country_new_cases;
+	public static String country_active_cases;
+	public static String country_new_deaths;
+	public static String country_total_recovered;
+	public static int province_confirmed;
+	public static int province_deaths;
 	
-	public static boolean extractedInfo;
+	public static boolean extractedCountryInfo;
 }
