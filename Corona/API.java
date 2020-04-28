@@ -56,20 +56,20 @@ public class API {
 			return true;
 
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
 		} catch (java.net.SocketTimeoutException e) {
+			// e.printStackTrace();
 			System.out.println("server connection false");
 			return false;
 		}
-
 		catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
 		} finally {
@@ -104,19 +104,20 @@ public class API {
 			getProvinceInfo(responseContent.toString(), province);
 			return true;
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
 		} catch (java.net.SocketTimeoutException e) {
+			// e.printStackTrace();
 			System.out.println("server connection false");
 			return false;
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
 		} finally {
@@ -145,8 +146,8 @@ public class API {
 		JSONObject obj = new JSONObject(responseBody);
 		JSONObject covidStats = (JSONObject) obj.get("data");
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
-		for (int datapoint = 0; datapoint < 2945; datapoint++) {
-			// There are 2944 valid pieces of data that we pull from our API. The rest is gibberish
+		for (int datapoint = 0; datapoint < 2942; datapoint++) {
+			// There are 2942 valid pieces of data that we pull from our API. The rest is gibberish
 			JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
 			String currentProvince = jsonobject.getString("province");
 			int provinceCases = jsonobject.getInt("confirmed");
@@ -154,8 +155,8 @@ public class API {
 			Province provinceObject = new Province(currentProvince, provinceCases, provinceDeath);
 			Globals.provinceArray[datapoint] = provinceObject;	
 			if (currentProvince.equals(provinceName)) {
-				Globals.province_confirmed += jsonobject.getInt("confirmed");
-				Globals.province_deaths += jsonobject.getInt("deaths");
+				Globals.province_confirmed += provinceCases;
+				Globals.province_deaths += provinceDeath;
 			}
 		}
 	}

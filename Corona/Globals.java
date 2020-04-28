@@ -10,5 +10,5 @@ public class Globals {
 	public static int province_deaths;
 	
 	public static boolean extractedCountryInfo;
-	public static Province[] provinceArray = new Province[2945];
+	public static Province[] provinceArray = new Province[2942];
 }

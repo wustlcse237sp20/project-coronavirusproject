@@ -1,13 +1,11 @@
-
-
 public class Province {
-	private String name;
-	private int cases;
-	private int death;
+	protected String name;
+	protected int cases;
+	protected int deaths;
 	
 	public Province(String name, int cases, int death) {
 		this.name = name;
 		this.cases = cases;
-		this.death = death;
+		this.deaths = death;
 	}
 }
