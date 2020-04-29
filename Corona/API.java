@@ -18,7 +18,7 @@ public class API {
 	public API() {
 		responseContent = new StringBuffer();
 	}
-
+//f
 	public boolean testCountryAPIConnection(String country) {
 		System.out.println(country);
 		try {
