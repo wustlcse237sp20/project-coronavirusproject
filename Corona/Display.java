@@ -26,8 +26,8 @@ public class Display implements ActionListener {
 		frame = new JFrame();
 		searchButton = new JButton("Search");
 		searchButton.setBounds(283, 10, 85, 29);
-		top10 = new JButton("Top 10");
-		top10.setBounds(436, 10, 76, 29);
+		top10 = new JButton("Top cities");
+		top10.setBounds(419, 10, 93, 29);
 		textField = new JTextField();
 		textField.setBounds(77, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
@@ -57,7 +57,7 @@ public class Display implements ActionListener {
 		regionLabel.setBounds(21, 15, 61, 16);
 		frame.getContentPane().add(regionLabel);
 		
-		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox field unchecked\"");
+		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox unchecked");
 		description.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		description.setBounds(21, 38, 489, 16);
 		frame.getContentPane().add(description);
@@ -105,7 +105,7 @@ public class Display implements ActionListener {
 						textArea.append("Total recovered: " + Globals.country_total_recovered+"\n");
 						textArea.append("----------------------------\n");
 					} else {
-						textArea.append("Please enter a valid country into the search bar\n");
+						textArea.append("Please enter a country into the search bar\n");
 						textArea.append("----------------------------\n");
 					}
 				} else {
@@ -114,18 +114,18 @@ public class Display implements ActionListener {
 				}
 			}
 		} else { // They want to display top 10 provinces
-			if (api.testProvinceAPIConnection(Globals.region)) { // Unused parameter
+			if (api.testProvinceAPIConnection("Top10")) { // Unused parameter
 				int end = Globals.provinceArray.length - 1;
 				for (int type = 0; type < 2; type++) {
 					if (type == 0) {
-						textArea.append("Top 10 provinces by deaths\n");
+						textArea.append("Top 10 cities by deaths\n");
 						quickSort.sort(Globals.provinceArray, 0, end, false);
 						for (int rank = 0; rank < 10; rank++) {
 							textArea.append((rank+1) + ": " + Globals.provinceArray[end-rank].name +"\n");
 							textArea.append("Total deaths: " + Globals.provinceArray[end-rank].deaths +"\n");
 						}
 					} else {
-						textArea.append("Top 10 provinces by confirmed cases\n");
+						textArea.append("Top 10 cities by confirmed cases\n");
 						quickSort.sort(Globals.provinceArray, 0, end, true);
 						for (int rank = 0; rank < 10; rank++) {
 							textArea.append((rank+1) + ": " + Globals.provinceArray[end-rank].name +"\n");

@@ -56,20 +56,20 @@ public class API {
 			return true;
 
 		} catch (MalformedURLException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
 		} catch (java.net.SocketTimeoutException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("server connection false");
 			return false;
 		}
 		catch (IOException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
 		} finally {
@@ -101,23 +101,27 @@ public class API {
 				}
 				reader.close();
 			}
-			getProvinceInfo(responseContent.toString(), province);
+			if (province.equals("Top10")) { // If they want the top 10 cities
+				getTop10(responseContent.toString());
+			} else {
+				getProvinceInfo(responseContent.toString(), province);
+			}
 			return true;
 		} catch (MalformedURLException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("Malformed URL Excpetion");
 			return false;
 		} catch (java.net.SocketTimeoutException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("server connection false");
 			return false;
 		}
 		catch (IOException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("IO Excpetion");
 			return false;
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("Unspecified exception");
 			return false;
 		} finally {
@@ -158,6 +162,22 @@ public class API {
 				Globals.province_confirmed += provinceCases;
 				Globals.province_deaths += provinceDeath;
 			}
+		}
+	}
+	
+	public static void getTop10(String responseBody) {
+		JSONObject obj = new JSONObject(responseBody);
+		JSONObject covidStats = (JSONObject) obj.get("data");
+		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
+		for (int datapoint = 0; datapoint < 2881; datapoint++) {
+			// There are 2881 cities in our API (And they are all located at the start of the array)
+			JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
+			String area = jsonobject.getString("city");
+			area = area + ", " + jsonobject.getString("province");       
+			int provinceCases = jsonobject.getInt("confirmed");
+			int provinceDeath = jsonobject.getInt("deaths");		
+			Province provinceObject = new Province(area, provinceCases, provinceDeath);
+			Globals.provinceArray[datapoint] = provinceObject;	
 		}
 	}
 
