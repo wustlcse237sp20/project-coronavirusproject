@@ -74,6 +74,7 @@ public class Display implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
+		textArea.setText("");
 		API api = new API();
 		if (action.equals("Search")) { // They're looking for info on a specific region
 			Globals.region = textField.getText();
