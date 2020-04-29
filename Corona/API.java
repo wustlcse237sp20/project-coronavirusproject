@@ -155,9 +155,7 @@ public class API {
 			JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
 			String currentProvince = jsonobject.getString("province");
 			int provinceCases = jsonobject.getInt("confirmed");
-			int provinceDeath = jsonobject.getInt("deaths");		
-			Province provinceObject = new Province(currentProvince, provinceCases, provinceDeath);
-			Globals.provinceArray[datapoint] = provinceObject;	
+			int provinceDeath = jsonobject.getInt("deaths");			
 			if (currentProvince.equals(provinceName)) {
 				Globals.province_confirmed += provinceCases;
 				Globals.province_deaths += provinceDeath;
