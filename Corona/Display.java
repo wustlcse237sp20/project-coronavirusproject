@@ -130,6 +130,7 @@ public class Display implements ActionListener {
 			}
 		} 
 		else if (action.equals("Risk")) {
+			frame.dispose();
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
