@@ -1,3 +1,4 @@
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,8 @@ public class Display implements ActionListener {
 	private JTextArea textArea;
 	private JTextField textField;
 	private JCheckBox regionType;
+	private final JButton btnNewButton = new JButton("Risk");
+	private JLabel lblClickHereTo;
 
 	/**
 	 * Create the application.
@@ -31,7 +34,7 @@ public class Display implements ActionListener {
 		textField = new JTextField();
 		textField.setBounds(77, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
-		textArea.setBounds(21, 6, 512, 77);
+		textArea.setBounds(0, 6, 512, 77);
 		initialize();
 	}
 
@@ -51,6 +54,7 @@ public class Display implements ActionListener {
 		frame.getContentPane().add(textArea);
 
 		searchButton.addActionListener(this);
+		
 		top10.addActionListener(this);
 		
 		JLabel regionLabel = new JLabel("Region");
@@ -59,7 +63,7 @@ public class Display implements ActionListener {
 		
 		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox unchecked");
 		description.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		description.setBounds(21, 38, 489, 16);
+		description.setBounds(31, 43, 489, 16);
 		frame.getContentPane().add(description);
 		
 		regionType = new JCheckBox("Province");
@@ -67,13 +71,24 @@ public class Display implements ActionListener {
 		frame.getContentPane().add(regionType);
 		
 		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroll.setBounds(0, 66, 516, 213);
+		scroll.setBounds(0, 66, 262, 213);
 		frame.getContentPane().add(scroll);
+		btnNewButton.setBounds(338, 206, 117, 29);
+		frame.getContentPane().add(btnNewButton);
+		
+		btnNewButton.addActionListener(this);
+		
+		lblClickHereTo = new JLabel("Click here to know your risk of contraction");
+		lblClickHereTo.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		lblClickHereTo.setBounds(283, 235, 215, 16);
+		frame.getContentPane().add(lblClickHereTo);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
+		System.out.println(action);
+		textArea.setText("");
 		API api = new API();
 		if (action.equals("Search")) { // They're looking for info on a specific region
 			Globals.region = textField.getText();
@@ -113,7 +128,21 @@ public class Display implements ActionListener {
 					textArea.append("----------------------------\n");
 				}
 			}
-		} else { // They want to display top 10 provinces
+		} 
+		else if (action.equals("Risk")) {
+			frame.dispose();
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						SymptomsDisplay window = new SymptomsDisplay();
+						window.frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		else { // They want to display top 10 provinces
 			if (api.testProvinceAPIConnection("Top10")) { // Unused parameter
 				int end = Globals.provinceArray.length - 1;
 				for (int type = 0; type < 2; type++) {
