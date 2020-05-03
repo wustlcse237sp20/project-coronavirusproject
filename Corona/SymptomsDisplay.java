@@ -4,14 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
-import javax.swing.JTextArea;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+
+
 
 public class SymptomsDisplay implements ActionListener {
 
@@ -173,7 +172,7 @@ public class SymptomsDisplay implements ActionListener {
 	
 	}
 
-	public double checkBMI(String weight, String height, int age) {
+	public int checkBMI(String weight, String height, int age) {
 		int userWeight = toInt(weight);
 		double userHeight = ((double) toInt(height)) / 100;
 		double BMI = userWeight / (Math.pow(userHeight, 2));
@@ -263,6 +262,7 @@ public class SymptomsDisplay implements ActionListener {
 			String age = ageTextField.getText();
 			String weight = weightTextField.getText();
 			String height = heightTextField.getText();
+
 			boolean soreThroat = chckbxSoreThroat.isSelected();
 			boolean fever = chckbxFever.isSelected();
 			boolean shortBreath = chckbxShortnessOfBreath.isSelected();
@@ -271,9 +271,7 @@ public class SymptomsDisplay implements ActionListener {
 			boolean chills = chckbxChills.isSelected();
 			boolean headache = chckbxHeadache.isSelected();
 			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
-			
-			double BMIpp = checkBMI(weight, height, toInt(age));
-			System.out.println(BMIpp);
+
 		}
 		
 	}
