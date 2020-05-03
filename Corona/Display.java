@@ -1,3 +1,4 @@
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -76,7 +77,7 @@ public class Display implements ActionListener {
 		String action = e.getActionCommand();
 		textArea.setText("");
 		API api = new API();
-		if (action.equals("Search")) { // They're looking for info on a specific region
+		if (action.equals("Searchwedq")) { // They're looking for info on a specific region
 			Globals.region = textField.getText();
 			if(regionType.isSelected()) {
 				if (api.testProvinceAPIConnection(Globals.region)) {
@@ -114,7 +115,20 @@ public class Display implements ActionListener {
 					textArea.append("----------------------------\n");
 				}
 			}
-		} else { // They want to display top 10 provinces
+		} 
+		else if (action.equals("Search")) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						SymptomsDisplay window = new SymptomsDisplay();
+						window.frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		else { // They want to display top 10 provinces
 			if (api.testProvinceAPIConnection("Top10")) { // Unused parameter
 				int end = Globals.provinceArray.length - 1;
 				for (int type = 0; type < 2; type++) {

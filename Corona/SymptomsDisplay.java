@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class SymptomsDisplay  {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField textField_1;
 	private JTextField textField;
 	private JTextField textField_2;
@@ -24,16 +24,7 @@ public class SymptomsDisplay  {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SymptomsDisplay window = new SymptomsDisplay();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
 	}
 
 	/**
