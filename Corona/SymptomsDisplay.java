@@ -5,13 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class SymptomsDisplay {
+public class SymptomsDisplay  {
 
 	private JFrame frame;
 	private JTextField textField_1;
@@ -144,18 +145,15 @@ public class SymptomsDisplay {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(192, 427, 200, 50);
 		frame.getContentPane().add(btnSubmit);
-		
-				
-		if(btnSubmit.getModel().isPressed() == true) {
-			setVariables();
-		}
-		
-		
+		btnSubmit.addActionListener(new Action());
+	
 	}
 	
-	public void setVariables() {
-		System.out.println("Muzz is a bitch");
-		
-
+	static class Action implements ActionListener{
+		public void actionPerformed (ActionEvent e) {
+			System.out.println("hello");
+		}
 	}
+	
+	
 }
