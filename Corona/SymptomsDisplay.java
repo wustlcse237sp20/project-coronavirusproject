@@ -88,7 +88,7 @@ public class SymptomsDisplay implements ActionListener {
 		frame.getContentPane().add(lblSymptomsifAny);
 		
 		chckbxFever = new JCheckBox("Fever");
-		chckbxFever.setBounds(128, 259, 71, 23);
+		chckbxFever.setBounds(6, 259, 71, 23);
 		frame.getContentPane().add(chckbxFever);
 		
 		chckbxShortnessOfBreath = new JCheckBox("Shortness of Breath");
@@ -96,7 +96,7 @@ public class SymptomsDisplay implements ActionListener {
 		frame.getContentPane().add(chckbxShortnessOfBreath);
 		
 		chckbxLossOfSmelltaste = new JCheckBox("Loss of Smell/Taste");
-		chckbxLossOfSmelltaste.setBounds(128, 294, 161, 23);
+		chckbxLossOfSmelltaste.setBounds(6, 294, 161, 23);
 		frame.getContentPane().add(chckbxLossOfSmelltaste);
 		
 		chckbxMusclePain = new JCheckBox("Muscle Pain");
@@ -144,7 +144,7 @@ public class SymptomsDisplay implements ActionListener {
 		
 		
 		chckbxCough = new JCheckBox("Cough");
-		chckbxCough.setBounds(128, 329, 128, 23);
+		chckbxCough.setBounds(6, 329, 128, 23);
 		frame.getContentPane().add(chckbxCough);
 		
 		chckbxChills = new JCheckBox("Chills");
@@ -152,7 +152,7 @@ public class SymptomsDisplay implements ActionListener {
 		frame.getContentPane().add(chckbxChills);
 		
 		chckbxSoreThroat = new JCheckBox("Sore Throat");
-		chckbxSoreThroat.setBounds(128, 364, 128, 23);
+		chckbxSoreThroat.setBounds(6, 364, 128, 23);
 		frame.getContentPane().add(chckbxSoreThroat);
 		
 		chckbxHeadache = new JCheckBox("Headache");
@@ -183,7 +183,7 @@ public class SymptomsDisplay implements ActionListener {
 			}
 			else {
 				if (BMI > 26 && BMI < 45) {
-					System.out.println("You are not in a healthy condition");
+					// System.out.println("You are not in a healthy condition");
 					return 4;
 				}
 				else {
@@ -255,8 +255,7 @@ public class SymptomsDisplay implements ActionListener {
 					}
 				}
 			});
-		}
-		else if (action.equals("Submit")) {
+		} else if (action.equals("Submit")) {
 			
 			String city = residenceTextField.getText();
 			String age = ageTextField.getText();
@@ -278,3 +277,4 @@ public class SymptomsDisplay implements ActionListener {
 	
 	
 }
+
