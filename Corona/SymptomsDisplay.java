@@ -21,7 +21,7 @@ public class SymptomsDisplay implements ActionListener {
 	private JTextField weightTextField;
 	private JTextField heightTextField;
 	
-	private JCheckBox chckbxNewCheckBox;
+	private JCheckBox feverCheckBox;
 	private JCheckBox chckbxShortnessOfBreath;
 	private JCheckBox chckbxLossOfSmelltase;
 	private JCheckBox chckbxMusclePain;
@@ -87,9 +87,9 @@ public class SymptomsDisplay implements ActionListener {
 		lblSymptomsifAny.setBounds(311, 225, 71, 16);
 		frame.getContentPane().add(lblSymptomsifAny);
 		
-		chckbxNewCheckBox = new JCheckBox("Fever");
-		chckbxNewCheckBox.setBounds(179, 275, 71, 23);
-		frame.getContentPane().add(chckbxNewCheckBox);
+		feverCheckBox = new JCheckBox("Fever");
+		feverCheckBox.setBounds(179, 275, 71, 23);
+		frame.getContentPane().add(feverCheckBox);
 		
 		chckbxShortnessOfBreath = new JCheckBox("Shortness of Breath");
 		chckbxShortnessOfBreath.setBounds(371, 275, 155, 23);
@@ -257,9 +257,17 @@ public class SymptomsDisplay implements ActionListener {
 			String age = ageTextField.getText();
 			String weight = weightTextField.getText();
 			String height = heightTextField.getText();
-			
-			double BMIpp =  calculateBMI(weight, height);
-			System.out.println(BMIpp);
+			Boolean fever = feverCheckBox.isSelected();
+			Boolean lossOfSmell = chckbxLossOfSmelltase.isSelected();
+			Boolean cough = coughCheckBox.isSelected();
+			Boolean SoreThroat = soreThroatCheckBox.isSelected();
+			Boolean ShortnessBreath = chckbxShortnessOfBreath.isSelected();
+			Boolean musclePain = chckbxMusclePain.isSelected();
+			Boolean chills = chckbxChills.isSelected();
+			Boolean headache = chckbxHeadache.isSelected();
+				
+//			double BMIpp =  calculateBMI(weight, height);
+			System.out.println(headache);
 		}
 		
 	}
