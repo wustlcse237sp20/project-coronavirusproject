@@ -8,6 +8,11 @@ public class Globals {
 	public static String country_total_recovered;
 	public static int province_confirmed;
 	public static int province_deaths;
+	public static String resident_country;
+	public static String country_visited;
+	public static int age;
+	public static int weight;
+	public static int height; 
 	
 	public static boolean extractedCountryInfo;
 }
