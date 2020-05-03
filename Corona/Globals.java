@@ -23,7 +23,7 @@ public class Globals {
 	public static String userHeight;
 	
 	//For the Travel Safe Method
-	public static String travelCity1;
+	public static String travelCity1; 
 	public static String travelCity1Cases;
 	public static String travelCity1Population;
 	public static String travelCity2;

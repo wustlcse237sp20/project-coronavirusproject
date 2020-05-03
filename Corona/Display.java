@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
+import javax.swing.JButton; 
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
@@ -20,7 +20,7 @@ public class Display implements ActionListener {
 	private JTextField textField;
 	private JCheckBox regionType;
 	private final JButton btnNewButton = new JButton("Risk");
-	private JLabel lblClickHereTo;
+	private JLabel riskLabel;
 
 	/**
 	 * Create the application.
@@ -28,13 +28,14 @@ public class Display implements ActionListener {
 	public Display() {
 		frame = new JFrame();
 		searchButton = new JButton("Search");
-		searchButton.setBounds(283, 10, 85, 29);
+		searchButton.setBounds(281, 10, 85, 29);
 		top10 = new JButton("Top cities");
-		top10.setBounds(419, 10, 93, 29);
+		top10.setBounds(338, 63, 93, 29);
 		textField = new JTextField();
-		textField.setBounds(77, 10, 130, 26);
+		textField.setBounds(52, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
-		textArea.setBounds(0, 6, 512, 77);
+		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		textArea.setBounds(4, 6, 512, 77);
 		initialize();
 	}
 
@@ -58,30 +59,35 @@ public class Display implements ActionListener {
 		top10.addActionListener(this);
 		
 		JLabel regionLabel = new JLabel("Region");
-		regionLabel.setBounds(21, 15, 61, 16);
+		regionLabel.setBounds(6, 15, 48, 16);
 		frame.getContentPane().add(regionLabel);
 		
 		JLabel description = new JLabel("If you would like to search for national information, leave the checkbox unchecked");
-		description.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		description.setBounds(31, 43, 489, 16);
+		description.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		description.setBounds(16, 43, 404, 16);
 		frame.getContentPane().add(description);
 		
 		regionType = new JCheckBox("Province");
-		regionType.setBounds(199, 11, 85, 23);
+		regionType.setBounds(194, 11, 85, 23);
 		frame.getContentPane().add(regionType);
 		
 		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(0, 66, 262, 213);
 		frame.getContentPane().add(scroll);
-		btnNewButton.setBounds(338, 206, 117, 29);
+		btnNewButton.setBounds(334, 104, 117, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		btnNewButton.addActionListener(this);
 		
-		lblClickHereTo = new JLabel("Click here to know your risk of contraction");
-		lblClickHereTo.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblClickHereTo.setBounds(283, 235, 215, 16);
-		frame.getContentPane().add(lblClickHereTo);
+		riskLabel = new JLabel("Click above to calculate your risk of contraction");
+		riskLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		riskLabel.setBounds(280, 134, 240, 16);
+		frame.getContentPane().add(riskLabel);
+		
+		JLabel top10Label = new JLabel("Click above for top 10 affected cities");
+		top10Label.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		top10Label.setBounds(295, 88, 215, 16);
+		frame.getContentPane().add(top10Label);
 	}
 	
 	@Override
