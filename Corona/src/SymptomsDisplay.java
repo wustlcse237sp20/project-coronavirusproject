@@ -229,8 +229,9 @@ public class SymptomsDisplay implements ActionListener {
 	
 	}
 	
-	public double riskScore(int age, String city, String country, Vector<Boolean> symptoms, String[] infectedCities, String[] infectedCountries, Vector<Boolean> conditions) {
+	public Vector<Double> riskScore(int age, String city, String country, Vector<Boolean> symptoms, String[] infectedCities, String[] infectedCountries, Vector<Boolean> conditions) {
 
+		Vector<Double> returnV = new Vector<Double>();
 		double count = 0;
 		double chanceContracted = 0;
 		double chanceDeath = 0;
@@ -269,7 +270,11 @@ public class SymptomsDisplay implements ActionListener {
 		
 		textArea.append("Risk of contraction is: " + (Math.round(chanceContracted*100.0)/100.0) +"%\n");
 		textArea.append("Risk of death: " + (Math.round(chanceDeath*100.0)/100.0) +"%\n");
-		return (Math.round(chanceDeath*100.0)/100.0);
+		
+		returnV.add((Math.round(chanceContracted*100.0)/100.0));
+		returnV.add((Math.round(chanceDeath*100.0)/100.0));
+		
+		return returnV;
 	}
 	
 	

@@ -17,6 +17,7 @@ class testRiskPercentage {
 		SymptomsDisplay test = new SymptomsDisplay();
 		Vector<Boolean> symptoms = new Vector<Boolean>(8);
 		Vector<Boolean> conditions = new Vector<Boolean>(9);
+		Vector<Double> returnV = new Vector<Double>(2);
 		String[] infectedCities = {"new york city", "cook", "nassau", "suffolk", "westchester", "los angeles", "wayne", "bergen", "hudson", "philadelphia"};
 		String[] infectedCountries = {"usa", "italy", "spain", "germany", "china"};
 		
@@ -39,10 +40,9 @@ class testRiskPercentage {
 		conditions.add(true); //chckbxObesity
 		conditions.add(true); //chckbxDiabetes
 		
-		double chanceDeath =  test.riskScore(22, "Lahore", "Pakistan", symptoms, infectedCities, infectedCountries, conditions);
-		assertTrue(chanceDeath < 100.0);
-		
-		
+		returnV =  test.riskScore(22, "Lahore", "Pakistan", symptoms, infectedCities, infectedCountries, conditions);
+		assertTrue(returnV.get(0) < 100.0);
+		assertTrue(returnV.get(1) < 100.0);
 	}
 	
 	@Test
