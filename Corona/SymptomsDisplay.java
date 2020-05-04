@@ -13,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
-
-
 public class SymptomsDisplay implements ActionListener {
 
 	JFrame frame;
