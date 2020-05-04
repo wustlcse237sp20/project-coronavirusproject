@@ -41,6 +41,8 @@ class testRiskPercentage {
 		
 		double chanceDeath =  test.riskScore(22, "Lahore", "Pakistan", symptoms, infectedCities, infectedCountries, conditions);
 		assertTrue(chanceDeath < 100.0);
+		
+		
 	}
 	
 	@Test
