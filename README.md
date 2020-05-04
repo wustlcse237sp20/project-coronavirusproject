@@ -1,5 +1,35 @@
 # cse237-project
 
+ITERATION 3:
+
+1. Completed user stories:
+- Top 10 countries infected
+- Test your susceptibility
+- Search for cities and its stats
+- User can run from command line
+
+2. Implemented but currently not working:
+- Country comparison
+- Heat map
+
+3. To run the program
+    a. From Eclipse, select CoronaClass and simply click run.
+    b. From command line, open up terminal, navigate to the Corona folder.
+        - for Window, run java -cp .;json-20190722.jar CoronaClass
+        - for Mac, run java -cp .:json-20190722.jar CoronaClass
+    *** if the class did not run or not compile, run <<< javac -cp .;json-20190722.jar *.java >>>, then run the above command again. ***
+
+
+
+
+
+
+
+
+
+_________________________________________________________________________________________________
+
+
 ITERATION 1
 
 What user stories were completed this iteration?
