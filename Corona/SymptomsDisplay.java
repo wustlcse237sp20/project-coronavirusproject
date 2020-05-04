@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -20,19 +21,28 @@ public class SymptomsDisplay implements ActionListener {
 	private JTextField residenceTextField;
 	private JTextField weightTextField;
 	private JTextField heightTextField;
+	private JTextField countryTextField;
 	
 	private JCheckBox chckbxFever;
 	private JCheckBox chckbxShortnessOfBreath;
 	private JCheckBox chckbxLossOfSmelltaste;
 	private JCheckBox chckbxMusclePain;
-	
 	private JCheckBox chckbxCough;
 	private JCheckBox chckbxChills;
 	private JCheckBox chckbxSoreThroat;
 	private JCheckBox chckbxHeadache;
-	private JCheckBox chckbxConditionsApply;
 	
-	private JComboBox visitedCheckList;
+	private JCheckBox chckbxKidneyDisease;
+	private JCheckBox chckbxLiverDisease;
+	private JCheckBox chckbxLungDisease;
+	private JCheckBox chckbxAsthma;
+	private JCheckBox chckbxNursingHome;
+	private JCheckBox chkbxHeart;
+	private JCheckBox chckbxImmunocompromised;
+	private JCheckBox chckbxObesity;
+	private JCheckBox chckbxDiabetes;
+	
+	// private JComboBox visitedCheckList;
 	
 	/**
 	 * Launch the application.
@@ -86,35 +96,36 @@ public class SymptomsDisplay implements ActionListener {
 		ageTextField.setColumns(10);
 		
 		JLabel lblSymptomsifAny = new JLabel("Symptoms");
-		lblSymptomsifAny.setBounds(96, 200, 71, 16);
+		lblSymptomsifAny.setBounds(46, 200, 71, 16);
 		frame.getContentPane().add(lblSymptomsifAny);
 		
 		chckbxFever = new JCheckBox("Fever");
-		chckbxFever.setBounds(6, 234, 71, 23);
+		chckbxFever.setBounds(6, 238, 71, 23);
 		frame.getContentPane().add(chckbxFever);
 		
 		chckbxShortnessOfBreath = new JCheckBox("Shortness of Breath");
-		chckbxShortnessOfBreath.setBounds(174, 234, 155, 23);
+		chckbxShortnessOfBreath.setBounds(6, 363, 155, 23);
 		frame.getContentPane().add(chckbxShortnessOfBreath);
 		
 		chckbxLossOfSmelltaste = new JCheckBox("Loss of Smell/Taste");
-		chckbxLossOfSmelltaste.setBounds(6, 269, 161, 23);
+		chckbxLossOfSmelltaste.setBounds(6, 258, 161, 23);
 		frame.getContentPane().add(chckbxLossOfSmelltaste);
 		
 		chckbxMusclePain = new JCheckBox("Muscle Pain");
-		chckbxMusclePain.setBounds(174, 273, 128, 23);
+		chckbxMusclePain.setBounds(6, 344, 128, 23);
 		frame.getContentPane().add(chckbxMusclePain);
 		
-		JLabel lblCheckAllThat = new JLabel("check all that apply");
+		JLabel lblCheckAllThat = new JLabel("Check all that apply");
 		lblCheckAllThat.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblCheckAllThat.setBounds(79, 213, 88, 16);
+		lblCheckAllThat.setBounds(35, 213, 99, 16);
 		frame.getContentPane().add(lblCheckAllThat);
 		
-		visitedCheckList = new JComboBox();
+		/* visitedCheckList = new JComboBox();
 		visitedCheckList.setBounds(423, 106, 130, 27);
 		frame.getContentPane().add(visitedCheckList);
+		// visitedCheckList. */
 		
-		JLabel lblCountryVisitedIn = new JLabel("If you have visited another country in 2020, please select the most recent one");
+		JLabel lblCountryVisitedIn = new JLabel("If you have visited another country in 2020, please enter the most recent one");
 		lblCountryVisitedIn.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblCountryVisitedIn.setBounds(24, 110, 381, 16);
 		frame.getContentPane().add(lblCountryVisitedIn);
@@ -124,7 +135,6 @@ public class SymptomsDisplay implements ActionListener {
 		frame.getContentPane().add(residenceTextField);
 		residenceTextField.setColumns(10);
 		// Globals.country_visited = residenceCountryTextField.getText(); //this gives us user inout for country visited
-		
 		
 		JLabel lblWeight = new JLabel("Weight(kg):");
 		lblWeight.setBounds(192, 156, 88, 16);
@@ -146,19 +156,19 @@ public class SymptomsDisplay implements ActionListener {
 		
 		
 		chckbxCough = new JCheckBox("Cough");
-		chckbxCough.setBounds(6, 304, 128, 23);
+		chckbxCough.setBounds(6, 273, 128, 23);
 		frame.getContentPane().add(chckbxCough);
 		
 		chckbxChills = new JCheckBox("Chills");
-		chckbxChills.setBounds(174, 308, 128, 23);
+		chckbxChills.setBounds(6, 328, 128, 23);
 		frame.getContentPane().add(chckbxChills);
 		
 		chckbxSoreThroat = new JCheckBox("Sore Throat");
-		chckbxSoreThroat.setBounds(6, 339, 128, 23);
+		chckbxSoreThroat.setBounds(6, 293, 128, 23);
 		frame.getContentPane().add(chckbxSoreThroat);
 		
 		chckbxHeadache = new JCheckBox("Headache");
-		chckbxHeadache.setBounds(174, 343, 128, 23);
+		chckbxHeadache.setBounds(6, 308, 128, 23);
 		frame.getContentPane().add(chckbxHeadache);
 		
 		JButton submitButton = new JButton("Submit");
@@ -170,62 +180,56 @@ public class SymptomsDisplay implements ActionListener {
 		frame.getContentPane().add(backButton);
 		
 		JLabel lblConditions = new JLabel("Prexisting Conditions");
-		lblConditions.setBounds(386, 200, 140, 16);
+		lblConditions.setBounds(210, 200, 140, 16);
 		frame.getContentPane().add(lblConditions);
 		
-		JLabel lblConditionsCaption = new JLabel("If any condition applies, check the box below");
+		JLabel lblConditionsCaption = new JLabel("Check all that apply");
 		lblConditionsCaption.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblConditionsCaption.setBounds(341, 213, 216, 16);
+		lblConditionsCaption.setBounds(226, 213, 99, 16);
 		frame.getContentPane().add(lblConditionsCaption);
 		
-		JLabel lblLung = new JLabel("- Chronic Lung Disease");
-		lblLung.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblLung.setBounds(341, 263, 216, 16);
-		frame.getContentPane().add(lblLung);
+		// bxConditionsApply);
 		
-		JLabel lblAsthma = new JLabel("- Asthma");
-		lblAsthma.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblAsthma.setBounds(341, 278, 216, 16);
-		frame.getContentPane().add(lblAsthma);
+		countryTextField = new JTextField();
+		countryTextField.setBounds(417, 104, 130, 26);
+		countryTextField.setColumns(10);
+		frame.getContentPane().add(countryTextField);
 		
-		JLabel lblNursingHome = new JLabel("- Living in a nursing home");
-		lblNursingHome.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblNursingHome.setBounds(341, 294, 216, 16);
-		frame.getContentPane().add(lblNursingHome);
+		chckbxKidneyDisease = new JCheckBox("Kidney Disease");
+		chckbxKidneyDisease.setBounds(192, 238, 155, 23);
+		frame.getContentPane().add(chckbxKidneyDisease);
 		
-		JLabel lblHeart = new JLabel("- Hear disease");
-		lblHeart.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblHeart.setBounds(341, 311, 216, 16);
-		frame.getContentPane().add(lblHeart);
+		chckbxLiverDisease = new JCheckBox("Liver Disease");
+		chckbxLiverDisease.setBounds(192, 258, 155, 23);
+		frame.getContentPane().add(chckbxLiverDisease);
 		
-		JLabel lblImmunocompromised = new JLabel("- Immunocompromised");
-		lblImmunocompromised.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblImmunocompromised.setBounds(341, 329, 216, 16);
-		frame.getContentPane().add(lblImmunocompromised);
+		chckbxLungDisease = new JCheckBox("Chronic Lung Disease");
+		chckbxLungDisease.setBounds(192, 273, 182, 23);
+		frame.getContentPane().add(chckbxLungDisease);
 		
-		JLabel lblObesity = new JLabel("- Severe Obesity");
-		lblObesity.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblObesity.setBounds(341, 349, 216, 16);
-		frame.getContentPane().add(lblObesity);
+		chckbxAsthma = new JCheckBox("Asthma");
+		chckbxAsthma.setBounds(192, 293, 155, 23);
+		frame.getContentPane().add(chckbxAsthma);
 		
-		JLabel lblDiabetes = new JLabel("- Diabetes");
-		lblDiabetes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblDiabetes.setBounds(341, 368, 216, 16);
-		frame.getContentPane().add(lblDiabetes);
+		chckbxNursingHome = new JCheckBox("Living in a nursing home");
+		chckbxNursingHome.setBounds(191, 308, 201, 23);
+		frame.getContentPane().add(chckbxNursingHome);
 		
-		JLabel lblKidney = new JLabel("- Kidney disease");
-		lblKidney.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblKidney.setBounds(341, 234, 216, 16);
-		frame.getContentPane().add(lblKidney);
+		chkbxHeart = new JCheckBox("Heart disease");
+		chkbxHeart.setBounds(192, 328, 155, 23);
+		frame.getContentPane().add(chkbxHeart);
 		
-		JLabel lblLiver = new JLabel("- Liver disease");
-		lblLiver.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblLiver.setBounds(341, 250, 216, 16);
-		frame.getContentPane().add(lblLiver);
+		chckbxImmunocompromised = new JCheckBox("Immunocompromised");
+		chckbxImmunocompromised.setBounds(191, 344, 182, 23);
+		frame.getContentPane().add(chckbxImmunocompromised);
 		
-		chckbxConditionsApply = new JCheckBox("Condition(s) applies to me");
-		chckbxConditionsApply.setBounds(341, 392, 216, 23);
-		frame.getContentPane().add(chckbxConditionsApply);
+		chckbxObesity = new JCheckBox("Severe obesity");
+		chckbxObesity.setBounds(191, 363, 155, 23);
+		frame.getContentPane().add(chckbxObesity);
+		
+		chckbxDiabetes = new JCheckBox("Diabetes");
+		chckbxDiabetes.setBounds(192, 381, 155, 23);
+		frame.getContentPane().add(chckbxDiabetes);
 		
 		submitButton.addActionListener(this);
 		backButton.addActionListener(this);
@@ -250,8 +254,7 @@ public class SymptomsDisplay implements ActionListener {
 					return 5; 
 				}
 			}
-		}
-		else {
+		} else {
 			if (BMI > 22 && BMI < 32) {
 				System.out.println("You are in a healthy condition");
 				return 1;
@@ -317,20 +320,72 @@ public class SymptomsDisplay implements ActionListener {
 			});
 		} else if (action.equals("Submit")) {
 			
-			String city = residenceTextField.getText();
-			String age = ageTextField.getText();
-			String weight = weightTextField.getText();
-			String height = heightTextField.getText();
+			String city = residenceTextField.getText().strip().toLowerCase();
+			int age = toInt(ageTextField.getText());
+			String country = countryTextField.getText(); 
 
-			boolean soreThroat = chckbxSoreThroat.isSelected();
-			boolean fever = chckbxFever.isSelected();
-			boolean shortBreath = chckbxShortnessOfBreath.isSelected();
-			boolean musclePain = chckbxMusclePain.isSelected();
-			boolean cough = chckbxCough.isSelected();
-			boolean chills = chckbxChills.isSelected();
-			boolean headache = chckbxHeadache.isSelected();
-			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
-			boolean conditions = chckbxConditionsApply.isSelected();
+			Vector<Boolean> symptoms = new Vector<Boolean>(8);
+			Vector<Boolean> conditions = new Vector<Boolean>(9); 
+			String[] infectedCities = {"new york city", "cook", "nassau", "suffolk", "westchester", "los angeles", "wayne", "bergen", "hudson", "philadelphia"};
+			String[] infectedCountries = {"usa", "italy", "spain", "germany", "china"};
+			
+			symptoms.add(chckbxSoreThroat.isSelected());
+			symptoms.add(chckbxFever.isSelected());
+			symptoms.add(chckbxShortnessOfBreath.isSelected());
+			symptoms.add(chckbxMusclePain.isSelected());
+			symptoms.add(chckbxCough.isSelected());
+			symptoms.add(chckbxChills.isSelected());
+			symptoms.add(chckbxHeadache.isSelected());
+			symptoms.add(chckbxLossOfSmelltaste.isSelected());
+		
+			conditions.add(chckbxKidneyDisease.isSelected());
+			conditions.add(chckbxLiverDisease.isSelected());
+			conditions.add(chckbxLungDisease.isSelected());
+			conditions.add(chckbxAsthma.isSelected());
+			conditions.add(chckbxNursingHome.isSelected());
+			conditions.add(chkbxHeart.isSelected());
+			conditions.add(chckbxImmunocompromised.isSelected());
+			conditions.add(chckbxObesity.isSelected());
+			conditions.add(chckbxDiabetes.isSelected());
+			
+			double count = 0;
+			double infectionPoints = 0;
+			double chanceContracted = 0;
+			double count2 = 0;
+			double deathPoints = 0;
+			double chanceDeath = 0;
+			
+			// Calculate chance of having virus
+			for (Boolean b : symptoms) {
+				if (b) {
+					count++;
+				}
+			}
+			infectionPoints = Math.pow(1.5, count);
+			for (int i = 0; i < infectedCities.length; i++) {
+				if (infectedCities[i].equals(city)) {
+					infectionPoints += ((10 - i) / 2.0);
+				}
+			}
+			for (int i = 0; i < infectedCountries.length; i++) {
+				if (infectedCities[i].equals(city)) {
+					infectionPoints += ((5 - i));
+				}
+			}
+			chanceContracted = (infectionPoints / 37.0) * 100.0;
+			
+			// Calculate chance of death
+			if (age >= 65) {
+				deathPoints += 10;
+			}
+			for (Boolean b : conditions) {
+				if (b) {
+					count2++;
+				}
+			}
+			deathPoints += Math.pow(1.5, count2 - 1.0); 
+			
+			// Output points / 40 for % chance you have it
 
 		}
 		
