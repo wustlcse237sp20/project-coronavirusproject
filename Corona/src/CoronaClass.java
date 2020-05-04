@@ -1,11 +1,5 @@
 package src;
 
-// Run the program using 
-//<<<<< 
-//java -cp ./build;./lib/json-20190722.jar CoronaClass 
-//>>>>> 
-//inside Corona folder.
-
 import java.awt.EventQueue;
 
 public class CoronaClass {

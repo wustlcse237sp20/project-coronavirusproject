@@ -155,7 +155,7 @@ public class Display implements ActionListener {
 				for (int type = 0; type < 2; type++) {
 					if (type == 0) {
 						textArea.append("Top 10 cities by deaths\n");
-						quickSort.sort(Globals.provinceArray, 0, end, false);
+						quickSort.sort(Globals.provinceArray, 0, end, false); 
 						for (int rank = 0; rank < 10; rank++) {
 							textArea.append((rank+1) + ": " + Globals.provinceArray[end-rank].name +"\n");
 							textArea.append("Total deaths: " + Globals.provinceArray[end-rank].deaths +"\n");

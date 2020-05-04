@@ -170,13 +170,13 @@ public class API {
 		JSONObject covidStats = (JSONObject) obj.get("data");
 		JSONArray covidStatsArray = (JSONArray) covidStats.get("covid19Stats");
 		System.out.println(covidStatsArray);
-		for (int datapoint = 0; datapoint < 2942; datapoint++) {
-			// There are 2942 valid pieces of data that we pull from our API. The rest is gibberish
+		for (int datapoint = 0; datapoint < 3015; datapoint++) {
+			// There are 3015 valid pieces of data that we pull from our API. The rest is gibberish
 			JSONObject jsonobject = covidStatsArray.getJSONObject(datapoint);
 			String currentProvince = jsonobject.getString("province");
 			int provinceCases = jsonobject.getInt("confirmed");
 			int provinceDeath = jsonobject.getInt("deaths");
-			//int city = jsonobject.getInt(key)
+			System.out.println(currentProvince);
 			if (currentProvince.equals(provinceName)) {
 				Globals.province_confirmed += provinceCases;
 				Globals.province_deaths += provinceDeath;
