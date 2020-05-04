@@ -29,6 +29,7 @@ public class SymptomsDisplay implements ActionListener {
 	private JCheckBox chckbxChills;
 	private JCheckBox chckbxSoreThroat;
 	private JCheckBox chckbxHeadache;
+	private JCheckBox chckbxConditionsApply;
 	
 	// private JComboBox visitedCheckList;
 	
@@ -84,28 +85,28 @@ public class SymptomsDisplay implements ActionListener {
 		ageTextField.setColumns(10);
 		
 		JLabel lblSymptomsifAny = new JLabel("Symptoms");
-		lblSymptomsifAny.setBounds(233, 212, 71, 16);
+		lblSymptomsifAny.setBounds(96, 200, 71, 16);
 		frame.getContentPane().add(lblSymptomsifAny);
 		
 		chckbxFever = new JCheckBox("Fever");
-		chckbxFever.setBounds(6, 259, 71, 23);
+		chckbxFever.setBounds(6, 234, 71, 23);
 		frame.getContentPane().add(chckbxFever);
 		
 		chckbxShortnessOfBreath = new JCheckBox("Shortness of Breath");
-		chckbxShortnessOfBreath.setBounds(331, 259, 155, 23);
+		chckbxShortnessOfBreath.setBounds(174, 234, 155, 23);
 		frame.getContentPane().add(chckbxShortnessOfBreath);
 		
 		chckbxLossOfSmelltaste = new JCheckBox("Loss of Smell/Taste");
-		chckbxLossOfSmelltaste.setBounds(6, 294, 161, 23);
+		chckbxLossOfSmelltaste.setBounds(6, 269, 161, 23);
 		frame.getContentPane().add(chckbxLossOfSmelltaste);
 		
 		chckbxMusclePain = new JCheckBox("Muscle Pain");
-		chckbxMusclePain.setBounds(331, 294, 128, 23);
+		chckbxMusclePain.setBounds(174, 273, 128, 23);
 		frame.getContentPane().add(chckbxMusclePain);
 		
 		JLabel lblCheckAllThat = new JLabel("check all that apply");
 		lblCheckAllThat.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-		lblCheckAllThat.setBounds(226, 229, 88, 16);
+		lblCheckAllThat.setBounds(79, 213, 88, 16);
 		frame.getContentPane().add(lblCheckAllThat);
 		
 		/* visitedCheckList = new JComboBox();
@@ -144,19 +145,19 @@ public class SymptomsDisplay implements ActionListener {
 		
 		
 		chckbxCough = new JCheckBox("Cough");
-		chckbxCough.setBounds(6, 329, 128, 23);
+		chckbxCough.setBounds(6, 304, 128, 23);
 		frame.getContentPane().add(chckbxCough);
 		
 		chckbxChills = new JCheckBox("Chills");
-		chckbxChills.setBounds(331, 329, 128, 23);
+		chckbxChills.setBounds(174, 308, 128, 23);
 		frame.getContentPane().add(chckbxChills);
 		
 		chckbxSoreThroat = new JCheckBox("Sore Throat");
-		chckbxSoreThroat.setBounds(6, 364, 128, 23);
+		chckbxSoreThroat.setBounds(6, 339, 128, 23);
 		frame.getContentPane().add(chckbxSoreThroat);
 		
 		chckbxHeadache = new JCheckBox("Headache");
-		chckbxHeadache.setBounds(331, 364, 128, 23);
+		chckbxHeadache.setBounds(174, 343, 128, 23);
 		frame.getContentPane().add(chckbxHeadache);
 		
 		JButton submitButton = new JButton("Submit");
@@ -166,8 +167,66 @@ public class SymptomsDisplay implements ActionListener {
 		JButton backButton = new JButton("Home");
 		backButton.setBounds(6, 6, 140, 26);
 		frame.getContentPane().add(backButton);
-		submitButton.addActionListener(this);
 		
+		JLabel lblConditions = new JLabel("Prexisting Conditions");
+		lblConditions.setBounds(386, 200, 140, 16);
+		frame.getContentPane().add(lblConditions);
+		
+		JLabel lblConditionsCaption = new JLabel("If any condition applies, check the box below");
+		lblConditionsCaption.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblConditionsCaption.setBounds(341, 213, 216, 16);
+		frame.getContentPane().add(lblConditionsCaption);
+		
+		JLabel lblLung = new JLabel("- Chronic Lung Disease");
+		lblLung.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblLung.setBounds(341, 263, 216, 16);
+		frame.getContentPane().add(lblLung);
+		
+		JLabel lblAsthma = new JLabel("- Asthma");
+		lblAsthma.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblAsthma.setBounds(341, 278, 216, 16);
+		frame.getContentPane().add(lblAsthma);
+		
+		JLabel lblNursingHome = new JLabel("- Living in a nursing home");
+		lblNursingHome.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblNursingHome.setBounds(341, 294, 216, 16);
+		frame.getContentPane().add(lblNursingHome);
+		
+		JLabel lblHeart = new JLabel("- Hear disease");
+		lblHeart.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblHeart.setBounds(341, 311, 216, 16);
+		frame.getContentPane().add(lblHeart);
+		
+		JLabel lblImmunocompromised = new JLabel("- Immunocompromised");
+		lblImmunocompromised.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblImmunocompromised.setBounds(341, 329, 216, 16);
+		frame.getContentPane().add(lblImmunocompromised);
+		
+		JLabel lblObesity = new JLabel("- Severe Obesity");
+		lblObesity.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblObesity.setBounds(341, 349, 216, 16);
+		frame.getContentPane().add(lblObesity);
+		
+		JLabel lblDiabetes = new JLabel("- Diabetes");
+		lblDiabetes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblDiabetes.setBounds(341, 368, 216, 16);
+		frame.getContentPane().add(lblDiabetes);
+		
+		JLabel lblKidney = new JLabel("- Kidney disease");
+		lblKidney.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblKidney.setBounds(341, 234, 216, 16);
+		frame.getContentPane().add(lblKidney);
+		
+		JLabel lblLiver = new JLabel("- Liver disease");
+		lblLiver.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		lblLiver.setBounds(341, 250, 216, 16);
+		frame.getContentPane().add(lblLiver);
+		
+		chckbxConditionsApply = new JCheckBox("Condition(s) applies to me");
+		chckbxConditionsApply.setBounds(341, 392, 216, 23);
+		frame.getContentPane().add(chckbxConditionsApply);
+		
+		submitButton.addActionListener(this);
 		backButton.addActionListener(this);
 	
 	}
@@ -270,11 +329,10 @@ public class SymptomsDisplay implements ActionListener {
 			boolean chills = chckbxChills.isSelected();
 			boolean headache = chckbxHeadache.isSelected();
 			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
+			boolean conditions = chckbxConditionsApply.isSelected();
 
 		}
 		
 	}
-	
-	
 }
 
