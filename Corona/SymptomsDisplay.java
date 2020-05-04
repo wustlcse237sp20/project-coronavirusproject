@@ -331,6 +331,7 @@ public class SymptomsDisplay implements ActionListener {
 			boolean headache = chckbxHeadache.isSelected();
 			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
 			boolean conditions = chckbxConditionsApply.isSelected();
+			
 
 		}
 		
