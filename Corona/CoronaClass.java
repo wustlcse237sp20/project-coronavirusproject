@@ -1,5 +1,6 @@
 
-// Run the program using <<<<< 
+// Run the program using 
+//<<<<< 
 //java -cp ./build;./lib/json-20190722.jar CoronaClass 
 //>>>>> 
 //inside Corona folder.
