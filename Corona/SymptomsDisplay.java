@@ -42,9 +42,6 @@ public class SymptomsDisplay implements ActionListener {
 	private JCheckBox chckbxDiabetes;
 	private JTextArea textArea;
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,7 +56,7 @@ public class SymptomsDisplay implements ActionListener {
 	}
 
 	/**
-	 * Create the application.
+	 * Launch the panel
 	 */
 	public SymptomsDisplay() {
 		initialize();
