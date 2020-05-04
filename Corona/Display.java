@@ -48,7 +48,7 @@ public class Display implements ActionListener {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(searchButton);
 		frame.getContentPane().add(top10);
-		frame.getContentPane().add(textField);
+		frame.getContentPane().add(textField); 
 		
 		textField.setColumns(10);
 		textArea.setBackground(SystemColor.window);
