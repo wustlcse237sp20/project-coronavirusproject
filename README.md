@@ -13,6 +13,7 @@ ITERATION 3:
 - Heat map
 
 3. To run the program
+
     a. From Eclipse, select CoronaClass and simply click run.
     b. From command line, open up terminal, navigate to the Corona folder.
         - for Window, run java -cp .;json-20190722.jar CoronaClass
