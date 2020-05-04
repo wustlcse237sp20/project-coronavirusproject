@@ -1,4 +1,4 @@
-package test;
+package apiConnectionTests;
 
 import src.API;
 import org.junit.Test;

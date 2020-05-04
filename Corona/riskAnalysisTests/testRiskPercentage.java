@@ -1,4 +1,4 @@
-package test;
+package riskAnalysisTests;
 
 import src.API;
 import src.SymptomsDisplay;

@@ -288,6 +288,7 @@ public class SymptomsDisplay implements ActionListener {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
+						
 						Display window = new Display();
 						window.frame.setVisible(true);
 						
@@ -298,9 +299,10 @@ public class SymptomsDisplay implements ActionListener {
 			});
 		} else if (action.equals("Submit")) {
 			if(residenceTextField.getText().isEmpty() || ageTextField.getText().isEmpty() || weightTextField.getText().isEmpty() || heightTextField.getText().isEmpty() || countryTextField.getText().isEmpty()) {
-				textArea.append("PLEASE FILL OUT ALL FIELDS");
+				textArea.append("PLEASE FILL OUT ALL FIELDS ");
 			}
 			try {
+				textArea.setText("");
 				String city = residenceTextField.getText().strip().toLowerCase();
 				int age = Integer.parseInt(ageTextField.getText().trim());
 				String country = countryTextField.getText().strip().toLowerCase(); 

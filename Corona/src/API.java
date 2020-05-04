@@ -110,6 +110,7 @@ public class API {
 				}
 				reader.close();
 			}
+			System.out.println(responseContent.toString());
 			if (province.equals("Top10")) { // If they want the top 10 cities
 				getTop10(responseContent.toString());
 			} else {
@@ -201,6 +202,7 @@ public class API {
 			int provinceCases = jsonobject.getInt("confirmed");
 			int provinceDeath = jsonobject.getInt("deaths");		
 			Province provinceObject = new Province(area, provinceCases, provinceDeath);
+			System.out.println(provinceObject);
 			Globals.provinceArray[datapoint] = provinceObject;	
 		}
 	}
