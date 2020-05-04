@@ -243,76 +243,10 @@ public class SymptomsDisplay implements ActionListener {
 		backButton.addActionListener(this);
 	
 	}
-
-	public int checkBMI(String weight, String height, int age) {
-		int userWeight = toInt(weight);
-		double userHeight = ((double) toInt(height)) / 100;
-		double BMI = userWeight / (Math.pow(userHeight, 2));
-		if (age < 35) {
-			if (BMI > 18 && BMI < 26) {
-				System.out.println("You are in a healthy condition");
-				return 1;
-			}
-			else {
-				if (BMI > 26 && BMI < 45) {
-					// System.out.println("You are not in a healthy condition");
-					return 4;
-				}
-				else {
-					return 5; 
-				}
-			}
-		} else {
-			if (BMI > 22 && BMI < 32) {
-				System.out.println("You are in a healthy condition");
-				return 1;
-			}
-			else {
-				if (BMI > 33 && BMI < 47) {
-					System.out.println("You are not in a healthy condition");
-					return 4;
-				}
-				else {
-					return 5; 
-				}
-			}
-		}
-	}
-	
-	public int checkSoreThroat(Boolean input) {
-		if(input) {
-			return 5;
-		}
-		return 0;
-	}
-	
-	public int checkShortnessOfBreath(Boolean input) {
-		if(input) {
-			return 5;
-		}
-		return 0;
-	}
-	
-	
-	
-	public int toInt(String input) {
-		int value = 0;
-		try {
-			value = Integer.parseInt(input);
-		}
-		catch(NumberFormatException e) {
-			e.printStackTrace();
-			System.out.println("The age entered is not a number");
-		}
-		return value;
-	}
-	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		System.out.println(action);
 		if (action.equals("Home")) {
 			frame.dispose();
 			EventQueue.invokeLater(new Runnable() {
@@ -329,20 +263,8 @@ public class SymptomsDisplay implements ActionListener {
 		} else if (action.equals("Submit")) {
 			
 			String city = residenceTextField.getText().strip().toLowerCase();
-			int age = toInt(ageTextField.getText());
-			String country = countryTextField.getText(); 
-
-
-			boolean soreThroat = chckbxSoreThroat.isSelected();
-			boolean fever = chckbxFever.isSelected();
-			boolean shortBreath = chckbxShortnessOfBreath.isSelected();
-			boolean musclePain = chckbxMusclePain.isSelected();
-			boolean cough = chckbxCough.isSelected();
-			boolean chills = chckbxChills.isSelected();
-			boolean headache = chckbxHeadache.isSelected();
-			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
-			
-			
+			int age = Integer.parseInt(ageTextField.getText().trim());
+			String country = countryTextField.getText().strip().toLowerCase(); 
 
 			Vector<Boolean> symptoms = new Vector<Boolean>(8);
 			Vector<Boolean> conditions = new Vector<Boolean>(9); 
@@ -369,10 +291,7 @@ public class SymptomsDisplay implements ActionListener {
 			conditions.add(chckbxDiabetes.isSelected());
 			
 			double count = 0;
-			double infectionPoints = 0;
 			double chanceContracted = 0;
-			double count2 = 0;
-			double deathPoints = 0;
 			double chanceDeath = 0;
 			
 			// Calculate chance of having virus
@@ -381,37 +300,34 @@ public class SymptomsDisplay implements ActionListener {
 					count++;
 				}
 			}
-			infectionPoints = Math.pow(1.5, count);
+			chanceContracted = Math.pow(1.5, count);
 			for (int i = 0; i < infectedCities.length; i++) {
 				if (infectedCities[i].equals(city)) {
-					infectionPoints += ((10 - i) / 2.0);
+					chanceContracted += ((10 - i) / 2.0);
 				}
 			}
 			for (int i = 0; i < infectedCountries.length; i++) {
-				if (infectedCities[i].equals(city)) {
-					infectionPoints += ((5 - i));
+				if (infectedCountries[i].equals(country)) {
+					chanceContracted += ((5 - i));
 				}
 			}
-			chanceContracted = (infectionPoints / 37.0) * 100.0;
+			chanceContracted = (chanceContracted / 37.0) * 100.0;
 			
 			// Calculate chance of death
 			
 			if (age >= 65) {
-				deathPoints += 10;
+				chanceDeath += 10;
 			}
+			count = 0;
 			for (Boolean b : conditions) {
 				if (b) {
-					count2++;
+					count++;
 				}
 			}
-			deathPoints = chanceContracted * Math.pow(1.5, count2 - 1.0); 
-			chanceDeath = deathPoints/50;
-			textArea.append("Risk of contraction is: " + chanceContracted +"\n");
-			textArea.append("Risk of death: " + chanceDeath +"\n");
-			
-			// Output points / 40 for % chance you have it
-
-
+			chanceDeath = chanceContracted * Math.pow(1.5, count - 1.0); 
+			chanceDeath = chanceDeath/50.0;
+			textArea.append("Risk of contraction is: " + (Math.round(chanceContracted*100.0)/100.0) +"%\n");
+			textArea.append("Risk of death: " + (Math.round(chanceDeath*100.0)/100.0) +"%\n");
 		}
 		
 	}

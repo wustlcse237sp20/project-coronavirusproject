@@ -30,7 +30,7 @@ public class Display implements ActionListener {
 		searchButton = new JButton("Search");
 		searchButton.setBounds(281, 10, 85, 29);
 		top10 = new JButton("Top cities");
-		top10.setBounds(338, 63, 93, 29);
+		top10.setBounds(337, 102, 93, 29);
 		textField = new JTextField();
 		textField.setBounds(52, 10, 130, 26);
 		textArea = new JTextArea(13, 20);
@@ -74,19 +74,19 @@ public class Display implements ActionListener {
 		JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(0, 66, 262, 213);
 		frame.getContentPane().add(scroll);
-		btnNewButton.setBounds(334, 104, 117, 29);
+		btnNewButton.setBounds(327, 180, 117, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		btnNewButton.addActionListener(this);
 		
 		riskLabel = new JLabel("Click above to calculate your risk of contraction");
 		riskLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		riskLabel.setBounds(280, 134, 240, 16);
+		riskLabel.setBounds(270, 221, 240, 16);
 		frame.getContentPane().add(riskLabel);
 		
 		JLabel top10Label = new JLabel("Click above for top 10 affected cities");
 		top10Label.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		top10Label.setBounds(295, 88, 215, 16);
+		top10Label.setBounds(295, 132, 215, 16);
 		frame.getContentPane().add(top10Label);
 	}
 	
