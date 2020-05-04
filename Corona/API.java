@@ -18,14 +18,11 @@ public class API {
 	public API() {
 		responseContent = new StringBuffer();
 	}
-//f
 	
 	/**
 	
-	* @param  url  an absolute URL giving the base location of the image
-	* @param  name the location of the image, relative to the url argument
-	* @return      the image at the specified URL
-	* @see         Image
+	* @param   country: is the input country of the user. The API will then fetch data about that particular country.
+	* @return     All of data available related to Corona Virus about the country.
 	*/
 	public boolean testCountryAPIConnection(String country) {
 		System.out.println(country);
@@ -84,7 +81,11 @@ public class API {
 			connection.disconnect();
 		}
 	}
-
+	/**
+	* This method test the API connection and return data of a province typed in by the user if possible.
+	* @param   Province: is the input state or province of the user. The API will then fetch data about that particular province.
+	* @return     All of data available related to Corona Virus about the state/province.
+	*/
 	public boolean testProvinceAPIConnection(String province) {
 		try {
 			URL url = new URL("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?");
@@ -136,7 +137,11 @@ public class API {
 			connection.disconnect();
 		}
 	}
-
+	/**
+	* This method parse the data from API call.
+	* @param   responseBody: is the json data passed in by the API call.
+	* @return    true if the data was parse correctly. 
+	*/
 	public static boolean getCountryInfo(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		if (obj.has("country")) {
@@ -151,7 +156,13 @@ public class API {
 		}
 		return false;
 	}
-
+	/**
+	* This method parse the data from API call.
+	* @param   responseBody: is the json data passed in by the API call.
+	* @param  provinceName: is the province that was typed in by the user. This method use it to parse through the JSON
+	* returned by the API to grab the correct information to display.
+	* @return   Void
+	*/
 	public static void getProvinceInfo(String responseBody, String provinceName) {
 		Globals.province_confirmed = 0;
 		Globals.province_deaths = 0;
@@ -172,7 +183,11 @@ public class API {
 			}
 		}
 	}
-	
+	/**
+	* This method parse the data from API call.
+	* @param   responseBody: is the json data passed in by the API call.
+	* @return    top 10 infected city from the API call.
+	*/
 	public static void getTop10(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
 		JSONObject covidStats = (JSONObject) obj.get("data");
