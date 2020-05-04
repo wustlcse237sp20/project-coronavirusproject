@@ -11,6 +11,8 @@ import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 
 
@@ -41,6 +43,7 @@ public class SymptomsDisplay implements ActionListener {
 	private JCheckBox chckbxImmunocompromised;
 	private JCheckBox chckbxObesity;
 	private JCheckBox chckbxDiabetes;
+	private JTextArea textArea;
 	
 	// private JComboBox visitedCheckList;
 	
@@ -231,6 +234,11 @@ public class SymptomsDisplay implements ActionListener {
 		chckbxDiabetes.setBounds(192, 381, 155, 23);
 		frame.getContentPane().add(chckbxDiabetes);
 		
+		textArea = new JTextArea();
+		textArea.setBackground(UIManager.getColor("Button.background"));
+		textArea.setBounds(448, 242, 200, 146);
+		frame.getContentPane().add(textArea);
+		
 		submitButton.addActionListener(this);
 		backButton.addActionListener(this);
 	
@@ -387,6 +395,7 @@ public class SymptomsDisplay implements ActionListener {
 			chanceContracted = (infectionPoints / 37.0) * 100.0;
 			
 			// Calculate chance of death
+			
 			if (age >= 65) {
 				deathPoints += 10;
 			}
@@ -395,7 +404,10 @@ public class SymptomsDisplay implements ActionListener {
 					count2++;
 				}
 			}
-			deathPoints += Math.pow(1.5, count2 - 1.0); 
+			deathPoints = chanceContracted * Math.pow(1.5, count2 - 1.0); 
+			chanceDeath = deathPoints/50;
+			textArea.append("Risk of contraction is: " + chanceContracted +"\n");
+			textArea.append("Risk of death: " + chanceDeath +"\n");
 			
 			// Output points / 40 for % chance you have it
 
