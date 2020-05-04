@@ -229,8 +229,54 @@ public class SymptomsDisplay implements ActionListener {
 	
 	}
 	
+	public double riskScore(int age, String city, String country, Vector<Boolean> symptoms, String[] infectedCities, String[] infectedCountries, Vector<Boolean> conditions) {
+
+		double count = 0;
+		double chanceContracted = 0;
+		double chanceDeath = 0;
+		
+		// Calculate chance of having virus
+		for (Boolean b : symptoms) {
+			if (b) {
+				count++;
+			}
+		}
+		chanceContracted = Math.pow(1.5, count);
+		for (int i = 0; i < infectedCities.length; i++) {
+			if (infectedCities[i].equals(city)) {
+				chanceContracted += ((10 - i) / 2.0);
+			}
+		}
+		for (int i = 0; i < infectedCountries.length; i++) {
+			if (infectedCountries[i].equals(country)) {
+				chanceContracted += ((5 - i));
+			}
+		}
+		chanceContracted = (chanceContracted / 37.0) * 100.0;
+		
+		// Calculate chance of death
+		if (age >= 65) {
+			chanceDeath += 10;
+		}
+		count = 0;
+		for (Boolean b : conditions) {
+			if (b) {
+				count++;
+			}
+		}
+		chanceDeath = chanceContracted * Math.pow(1.5, count - 1.0); 
+		chanceDeath = chanceDeath/50.0;
+		
+		textArea.append("Risk of contraction is: " + (Math.round(chanceContracted*100.0)/100.0) +"%\n");
+		textArea.append("Risk of death: " + (Math.round(chanceDeath*100.0)/100.0) +"%\n");
+		return (Math.round(chanceDeath*100.0)/100.0);
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		textArea.setText("");
 		String action = e.getActionCommand();
 		if (action.equals("Home")) {
 			frame.dispose();
@@ -246,74 +292,53 @@ public class SymptomsDisplay implements ActionListener {
 				}
 			});
 		} else if (action.equals("Submit")) {
-			
-			String city = residenceTextField.getText().strip().toLowerCase();
-			int age = Integer.parseInt(ageTextField.getText().trim());
-			String country = countryTextField.getText().strip().toLowerCase(); 
+			if(residenceTextField.getText().isEmpty() || ageTextField.getText().isEmpty() || weightTextField.getText().isEmpty() || heightTextField.getText().isEmpty() || countryTextField.getText().isEmpty()) {
+				textArea.append("PLEASE FILL OUT ALL FIELDS");
+			}
+			try {
+				String city = residenceTextField.getText().strip().toLowerCase();
+				int age = Integer.parseInt(ageTextField.getText().trim());
+				String country = countryTextField.getText().strip().toLowerCase(); 
 
-			Vector<Boolean> symptoms = new Vector<Boolean>(8);
-			Vector<Boolean> conditions = new Vector<Boolean>(9); 
-			String[] infectedCities = {"new york city", "cook", "nassau", "suffolk", "westchester", "los angeles", "wayne", "bergen", "hudson", "philadelphia"};
-			String[] infectedCountries = {"usa", "italy", "spain", "germany", "china"};
+				Vector<Boolean> symptoms = new Vector<Boolean>(8);
+				Vector<Boolean> conditions = new Vector<Boolean>(9); 
+				String[] infectedCities = {"new york city", "cook", "nassau", "suffolk", "westchester", "los angeles", "wayne", "bergen", "hudson", "philadelphia"};
+				String[] infectedCountries = {"usa", "italy", "spain", "germany", "china"};
+				
+				symptoms.add(chckbxSoreThroat.isSelected());
+				symptoms.add(chckbxFever.isSelected());
+				symptoms.add(chckbxShortnessOfBreath.isSelected());
+				symptoms.add(chckbxMusclePain.isSelected());
+				symptoms.add(chckbxCough.isSelected());
+				symptoms.add(chckbxChills.isSelected());
+				symptoms.add(chckbxHeadache.isSelected());
+				symptoms.add(chckbxLossOfSmelltaste.isSelected());
 			
-			symptoms.add(chckbxSoreThroat.isSelected());
-			symptoms.add(chckbxFever.isSelected());
-			symptoms.add(chckbxShortnessOfBreath.isSelected());
-			symptoms.add(chckbxMusclePain.isSelected());
-			symptoms.add(chckbxCough.isSelected());
-			symptoms.add(chckbxChills.isSelected());
-			symptoms.add(chckbxHeadache.isSelected());
-			symptoms.add(chckbxLossOfSmelltaste.isSelected());
-		
-			conditions.add(chckbxKidneyDisease.isSelected());
-			conditions.add(chckbxLiverDisease.isSelected());
-			conditions.add(chckbxLungDisease.isSelected());
-			conditions.add(chckbxAsthma.isSelected());
-			conditions.add(chckbxNursingHome.isSelected());
-			conditions.add(chkbxHeart.isSelected());
-			conditions.add(chckbxImmunocompromised.isSelected());
-			conditions.add(chckbxObesity.isSelected());
-			conditions.add(chckbxDiabetes.isSelected());
+				conditions.add(chckbxKidneyDisease.isSelected());
+				conditions.add(chckbxLiverDisease.isSelected());
+				conditions.add(chckbxLungDisease.isSelected());
+				conditions.add(chckbxAsthma.isSelected());
+				conditions.add(chckbxNursingHome.isSelected());
+				conditions.add(chkbxHeart.isSelected());
+				conditions.add(chckbxImmunocompromised.isSelected());
+				conditions.add(chckbxObesity.isSelected());
+				conditions.add(chckbxDiabetes.isSelected());
+				
+				
+				riskScore(age, city, country, symptoms, infectedCities, infectedCountries, conditions);
+			}
+			catch (NumberFormatException event) {
+				textArea.setText("Please input a number");
+			}
 			
-			double count = 0;
-			double chanceContracted = 0;
-			double chanceDeath = 0;
+
 			
-			// Calculate chance of having virus
-			for (Boolean b : symptoms) {
-				if (b) {
-					count++;
-				}
-			}
-			chanceContracted = Math.pow(1.5, count);
-			for (int i = 0; i < infectedCities.length; i++) {
-				if (infectedCities[i].equals(city)) {
-					chanceContracted += ((10 - i) / 2.0);
-				}
-			}
-			for (int i = 0; i < infectedCountries.length; i++) {
-				if (infectedCountries[i].equals(country)) {
-					chanceContracted += ((5 - i));
-				}
-			}
-			chanceContracted = (chanceContracted / 37.0) * 100.0;
-			
-			// Calculate chance of death
-			if (age >= 65) {
-				chanceDeath += 10;
-			}
-			count = 0;
-			for (Boolean b : conditions) {
-				if (b) {
-					count++;
-				}
-			}
-			chanceDeath = chanceContracted * Math.pow(1.5, count - 1.0); 
-			chanceDeath = chanceDeath/50.0;
-			
-			textArea.append("Risk of contraction is: " + (Math.round(chanceContracted*100.0)/100.0) +"%\n");
-			textArea.append("Risk of death: " + (Math.round(chanceDeath*100.0)/100.0) +"%\n");
 		}
 		
 	}
 }
+
+//if(residenceTextField.getText().isEmpty() || ageTextField.getText().isEmpty() || weightTextField.getText().isEmpty() || heightTextField.getText().isEmpty() || countryTextField.getText().isEmpty()) {
+//	textArea.append("PLEASE FILL OUT ALL FIELDS");
+//	
+//}
