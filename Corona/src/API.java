@@ -1,3 +1,4 @@
+package src;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +21,6 @@ public class API {
 	}
 	
 	/**
-	
 	* @param   country: is the input country of the user. The API will then fetch data about that particular country.
 	* @return     All of data available related to Corona Virus about the country.
 	*/

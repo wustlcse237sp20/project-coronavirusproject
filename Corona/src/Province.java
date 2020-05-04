@@ -1,3 +1,4 @@
+package src;
 public class Province {
 	protected String name;
 	protected int cases;

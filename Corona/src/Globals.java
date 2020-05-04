@@ -1,3 +1,4 @@
+package src;
 public class Globals {
 	public static String region;
 	public static String country_total_cases;

@@ -1,3 +1,4 @@
+package src;
 
 // Run the program using 
 //<<<<< 
