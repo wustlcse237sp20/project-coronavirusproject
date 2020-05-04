@@ -324,7 +324,7 @@ public class SymptomsDisplay implements ActionListener {
 			int age = toInt(ageTextField.getText());
 			String country = countryTextField.getText(); 
 
-<<<<<<< HEAD
+
 			boolean soreThroat = chckbxSoreThroat.isSelected();
 			boolean fever = chckbxFever.isSelected();
 			boolean shortBreath = chckbxShortnessOfBreath.isSelected();
@@ -333,9 +333,9 @@ public class SymptomsDisplay implements ActionListener {
 			boolean chills = chckbxChills.isSelected();
 			boolean headache = chckbxHeadache.isSelected();
 			boolean smellTaste = chckbxLossOfSmelltaste.isSelected();
-			boolean conditions = chckbxConditionsApply.isSelected();
 			
-=======
+			
+
 			Vector<Boolean> symptoms = new Vector<Boolean>(8);
 			Vector<Boolean> conditions = new Vector<Boolean>(9); 
 			String[] infectedCities = {"new york city", "cook", "nassau", "suffolk", "westchester", "los angeles", "wayne", "bergen", "hudson", "philadelphia"};
@@ -398,7 +398,7 @@ public class SymptomsDisplay implements ActionListener {
 			deathPoints += Math.pow(1.5, count2 - 1.0); 
 			
 			// Output points / 40 for % chance you have it
->>>>>>> branch 'Display' of https://github.com/wustlcse237sp20/project-coronavirusproject.git
+
 
 		}
 		
