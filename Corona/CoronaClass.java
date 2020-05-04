@@ -5,16 +5,12 @@
 //>>>>> 
 //inside Corona folder.
 
-
 import java.awt.EventQueue;
 
 public class CoronaClass {
 
 	public static void main(String[] args) {
 
-		cityComparison comparison = new cityComparison();
-		comparison.travelSafeDeterminer();
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
