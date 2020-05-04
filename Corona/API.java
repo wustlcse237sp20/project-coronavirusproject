@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class API {
-
+	
 	private static HttpURLConnection connection;
 	private BufferedReader reader;
 	private String line;
@@ -19,6 +19,14 @@ public class API {
 		responseContent = new StringBuffer();
 	}
 //f
+	
+	/**
+	
+	* @param  url  an absolute URL giving the base location of the image
+	* @param  name the location of the image, relative to the url argument
+	* @return      the image at the specified URL
+	* @see         Image
+	*/
 	public boolean testCountryAPIConnection(String country) {
 		System.out.println(country);
 		try {
