@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -44,8 +43,6 @@ public class SymptomsDisplay implements ActionListener {
 	private JCheckBox chckbxObesity;
 	private JCheckBox chckbxDiabetes;
 	private JTextArea textArea;
-	
-	// private JComboBox visitedCheckList;
 	
 	/**
 	 * Launch the application.
@@ -123,11 +120,6 @@ public class SymptomsDisplay implements ActionListener {
 		lblCheckAllThat.setBounds(35, 213, 99, 16);
 		frame.getContentPane().add(lblCheckAllThat);
 		
-		/* visitedCheckList = new JComboBox();
-		visitedCheckList.setBounds(423, 106, 130, 27);
-		frame.getContentPane().add(visitedCheckList);
-		// visitedCheckList. */
-		
 		JLabel lblCountryVisitedIn = new JLabel("If you have visited another country in 2020, please enter the most recent one");
 		lblCountryVisitedIn.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblCountryVisitedIn.setBounds(24, 110, 381, 16);
@@ -137,7 +129,6 @@ public class SymptomsDisplay implements ActionListener {
 		residenceTextField.setBounds(226, 60, 130, 26);
 		frame.getContentPane().add(residenceTextField);
 		residenceTextField.setColumns(10);
-		// Globals.country_visited = residenceCountryTextField.getText(); //this gives us user inout for country visited
 		
 		JLabel lblWeight = new JLabel("Weight(kg):");
 		lblWeight.setBounds(192, 156, 88, 16);
@@ -190,8 +181,6 @@ public class SymptomsDisplay implements ActionListener {
 		lblConditionsCaption.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		lblConditionsCaption.setBounds(226, 213, 99, 16);
 		frame.getContentPane().add(lblConditionsCaption);
-		
-		// bxConditionsApply);
 		
 		countryTextField = new JTextField();
 		countryTextField.setBounds(417, 104, 130, 26);
@@ -314,7 +303,6 @@ public class SymptomsDisplay implements ActionListener {
 			chanceContracted = (chanceContracted / 37.0) * 100.0;
 			
 			// Calculate chance of death
-			
 			if (age >= 65) {
 				chanceDeath += 10;
 			}
@@ -326,6 +314,7 @@ public class SymptomsDisplay implements ActionListener {
 			}
 			chanceDeath = chanceContracted * Math.pow(1.5, count - 1.0); 
 			chanceDeath = chanceDeath/50.0;
+			
 			textArea.append("Risk of contraction is: " + (Math.round(chanceContracted*100.0)/100.0) +"%\n");
 			textArea.append("Risk of death: " + (Math.round(chanceDeath*100.0)/100.0) +"%\n");
 		}

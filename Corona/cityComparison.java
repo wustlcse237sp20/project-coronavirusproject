@@ -102,10 +102,10 @@ public class cityComparison {
 			
 			float oneInCase2 = (pop2/cases2);
 			oneInCase2 = (float) Math.floor(oneInCase2);
-			System.out.println(city1 + " is not safer than " + city2);
+			/* System.out.println(city1 + " is not safer than " + city2);
 			System.out.println("1 in every " + oneInCase1 + " people have coronaVirus in " + city1);
 			System.out.println("1 in every " + oneInCase2 + " people have coronaVirus in " + city2);
-			System.out.println("The cases by population ratio is much higher in " + city1 + " than in " + city2);
+			System.out.println("The cases by population ratio is much higher in " + city1 + " than in " + city2); */
 		}
 		else if (checker2 > checker1) {
 			float oneInCase1 = (pop1/cases1);
@@ -113,13 +113,13 @@ public class cityComparison {
 			
 			float oneInCase2 = (pop2/cases2);
 			oneInCase2 = (float) Math.floor(oneInCase2);
-			System.out.println(city2 + " is not safer than " + city1);
+			/* System.out.println(city2 + " is not safer than " + city1);
 			System.out.println("1 in every " + oneInCase2 + " people have coronaVirus in " + city2);
 			System.out.println("1 in every " + oneInCase1 + " people have coronaVirus in " + city1);
-			System.out.println("The cases by population ratio is much higher in " + city2 + " than in " + city1);
+			System.out.println("The cases by population ratio is much higher in " + city2 + " than in " + city1); */
 		}
 		else {
-			System.out.println("Both cities are equally hazardous. Therefore, it would be better of you remained where you are.");
+			// System.out.println("Both cities are equally hazardous. Therefore, it would be better of you remained where you are.");
 		}
 	}
 	public void main(String[] args) {
