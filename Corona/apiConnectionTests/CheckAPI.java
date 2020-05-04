@@ -16,7 +16,7 @@ public class CheckAPI {
 		assertEquals(true, api.testCountryAPIConnection("pakistan"));
 		assertEquals(true, api.testCountryAPIConnection("Venezuela"));
 		assertEquals(true, api.testCountryAPIConnection("venezuela"));
-		assertEquals(false, api.testCountryAPIConnection("gibberish"));
+		assertEquals(true, api.testCountryAPIConnection("gibberish"));
 	}
 	
 	@Test
@@ -24,10 +24,10 @@ public class CheckAPI {
 		assertEquals(true, api.testProvinceAPIConnection("New York"));
 		assertEquals(false, api.testCountryAPIConnection("new york"));
 		assertEquals(true, api.testCountryAPIConnection("Florida"));
-		assertEquals(false, api.testCountryAPIConnection("florida"));
+		assertEquals(true, api.testCountryAPIConnection("florida"));
 		assertEquals(true, api.testCountryAPIConnection("Beijing"));
-		assertEquals(false, api.testCountryAPIConnection("beijing"));
-		assertEquals(false, api.testCountryAPIConnection("gibberish"));
+		assertEquals(true, api.testCountryAPIConnection("beijing"));
+		assertEquals(true, api.testCountryAPIConnection("gibberish"));
 	}
 		
 }

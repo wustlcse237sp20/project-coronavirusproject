@@ -1,6 +1,9 @@
 package src;
-class quickSort {
+public class quickSort {
 	
+	public quickSort() {
+		
+	}
 	/**
      * Recursively call the sort method on two halves of the array
      * @param provinces Array of all cities stored as province objects

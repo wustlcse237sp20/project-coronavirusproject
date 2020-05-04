@@ -36,7 +36,7 @@ public class checkWithInvalidInput {
 	}
 	
 	@Test
-	public void TestJohn() {
+	public void TestRandomName() {
 		responseContent = new StringBuffer();
 		API test = new API();
 		String inValidInput = "John";
