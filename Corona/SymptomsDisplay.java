@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 
@@ -31,7 +32,7 @@ public class SymptomsDisplay implements ActionListener {
 	private JCheckBox chckbxHeadache;
 	private JCheckBox chckbxConditionsApply;
 	
-	// private JComboBox visitedCheckList;
+	private JComboBox visitedCheckList;
 	
 	/**
 	 * Launch the application.
@@ -109,9 +110,9 @@ public class SymptomsDisplay implements ActionListener {
 		lblCheckAllThat.setBounds(79, 213, 88, 16);
 		frame.getContentPane().add(lblCheckAllThat);
 		
-		/* visitedCheckList = new JComboBox();
+		visitedCheckList = new JComboBox();
 		visitedCheckList.setBounds(423, 106, 130, 27);
-		frame.getContentPane().add(visitedCheckList); */
+		frame.getContentPane().add(visitedCheckList);
 		
 		JLabel lblCountryVisitedIn = new JLabel("If you have visited another country in 2020, please select the most recent one");
 		lblCountryVisitedIn.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
